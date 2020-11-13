@@ -1,0 +1,73 @@
+.work {
+    width: 70%;
+    margin-left: 15%;
+    padding: 2em;
+    background-color: rgba(255, 255, 240, 0.815);
+    margin-top: 1.2em;
+}
+.createJob input{
+    width: 70%;
+    margin-bottom: 1em;
+    margin-left: 15%;
+}
+.createJob{
+    display: flex;
+
+flex-direction: column;
+
+justify-content: space-around;
+}
+.actions{
+    display: flex;
+    justify-content: center;
+}
+.inputRow {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.jobData{
+    display: flex;
+}
+.jobInputs{
+    width: 60%;
+}
+label{
+    margin-left: 45%;
+}
+#jobImage{
+    width: 100%;
+}
+
+.imageDiv{
+    width:40%;
+    display: flex;
+    justify-content: center;
+}
+
+.file-upload {
+	position: relative;
+	display: inline-block;
+}
+
+.file-upload__label {
+  display: block;
+  padding: 8em 5em;
+  color: #fff;
+  background: rgba(34, 34, 34, 0.377);
+  border-radius: .4em;
+  transition: background .3s;
+  margin: 0 auto;
+}
+    
+.file-upload__input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    font-size: 1;
+    width:10;
+    height: 100%;
+    opacity: 0;
+}

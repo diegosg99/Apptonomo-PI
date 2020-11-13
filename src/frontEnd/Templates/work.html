@@ -1,0 +1,36 @@
+<article class="work">
+    <section class="createJob">
+        <p id="userName"></p>
+        <p id="userLocation"></p>
+        <div class="jobData">
+            <div class="jobInputs">
+                <div class="inputRow"><label for="jobName">Nombre de la tarea</label><input type="text" id ="jobName"></div>
+                <div class="inputRow"><label for="jobDesc">Descripción</label><input type="text" id ="jobDesc"></div>
+                <div class="inputRow"><label for="jobLabels">Categorías</label><input type="text" id ="jobLabels"><br></div>
+                <div class="inputRow"><label for="jobPay">Precio</label><input type="number" id ="jobPay"></div>
+                <br>
+                <div id="mapid"></div>
+                <div id="infoLocation">
+                    <h4 id="info" class="mapHeader">¿Confirmas la direccion?</h4><br>
+                    <div id="locationButtons">
+                        <button id='acceptLocation'>Sí, es mi domicilio.</button>
+                        <button id='denyLocation'>No.</button>
+                    </div>
+                    <input type="text" id="address">
+                    <input type="text" id="bloque" placeholder="Bloque"> (Opcional)
+                    <input type="text" id="casa" placeholder="Casa">
+                    <br><p id="lat"></p><p id="lon"></p>
+                </div>
+           </div>
+           <div class="imageDiv">
+            <div class="file-upload">
+                <label for="upload" class="file-upload__label">Css only file upload button</label>
+                <input id="upload" class="file-upload__input" type="file" name="file-upload">
+            </div>
+       </div>
+        </div>
+        <div class="actions">
+            <button id="createJob" class="accept-button">¡Buscar a alguien!</button>
+        </div>        
+    </section> 
+ </article>

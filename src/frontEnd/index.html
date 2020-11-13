@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Apptónomo</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Long+Cang&display=swap" rel="stylesheet"> <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200;300;400&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Kufam:wght@400;500&display=swap" rel="stylesheet"> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+    <style>#mapid { height: 280px; }</style>
+
+    <link rel="stylesheet" type="text/css" href="Assets/styles/index.css" />
+    <link rel="stylesheet" type="text/css" href="Assets/styles/login.css" />
+    <link rel="stylesheet" type="text/css" href="Assets/styles/work.css" />
+    <link rel="stylesheet" type="text/css" href="Assets/styles/user.css" />
+</head>
+<body>
+    <div class="header clearfix">
+        <div class="logo">Apptónomo</div>
+        <h5 class="slogan">Cambia aburrimiento por dinero</h5>
+        <nav>
+            <ul class="nav">
+                <li role="presentation" class="nav-button"><a class="links" href="#list">Mostrar trabajos <img class="small-icon" src="Assets/images/money.svg"></img></a></li>
+                <li role="presentation" class="nav-button"><a class="links" href="#work">Crear Trabajo <img class="small-icon" src="Assets/images/wrench.svg"></img></a></li>
+                <li role="presentation" class="nav-button"><a class="links" href="#user">Mi perfil <img class="small-icon" src="Assets/images/profile.svg"></img></a></li>
+                <li role="presentation" class="nav-button"><a class="links" href="#exit">Salir <img class="small-icon" src="Assets/images/logout.svg"></img></a></li>
+            </ul>
+        </nav>
+    </div>
+    <main id="content">
+        
+    </main>
+</body>
+
+<script src="Assets/resources/dexie.min.js"></script> 
+<script src='Models/user.model.js'></script>
+<script src='Models/job.model.js'></script>
+<script src='Models/rating.model.js'></script>
+
+<script src='Services/routing.service.js'></script>
+<script src='Services/lockService.js'></script>
+<script src='Services/dexieService.js'></script>
+<script src='Services/http.service.js'></script>
+<script src='Services/mapService.js'></script>
+
+
+<script src='app.js'></script>
+</html>

@@ -1,0 +1,77 @@
+.visible{
+    display: inline-flex;
+}
+.invisible{
+    display: none;
+}
+#login {
+    width: 50%;
+    margin-left: 25%;
+    padding: 2em;
+    background-color: rgba(255, 255, 240, 0.815);
+    margin-top: 2em;
+}
+
+.loginButtons{
+    padding: 1em;
+    display: inline-flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-bottom: 2em;
+}
+.loginButtons a{
+    padding: 1.2em;
+    background-color: rgba(126, 252, 0, 0.705);
+    border-radius: 8px;
+    padding-bottom:0.6em;
+    padding-top:0.6em;
+}
+#mapid { height: 300px;
+    width: 72.6%; 
+    margin-left:15%;
+    padding-bottom:1em;
+}
+
+#info
+{
+    flex-direction: column;
+    width: 70%; 
+    margin-left:15%;
+}
+
+.mapHeader{
+    width: 70%; 
+    margin-left:15%;
+    padding-bottom:1em;
+}
+.register{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.show{
+    display: inherit;
+}
+.hide{
+    display: none !important;
+}
+
+#alert
+{
+  width: 200px;
+  height: 200px;
+  border: solid 1px #000;
+  margin-top: -30px;
+  margin-left: 20px;
+  position: fixed;
+  background-color: #fff;
+}
+#locationButtons{
+    display: flex;
+    justify-content: space-around;
+    padding: 0.8em;
+}
+#locationButtons button{
+    width: 30%;
+    justify-content: space-around;
+}

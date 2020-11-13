@@ -1,0 +1,205 @@
+.header {
+    display: flex;
+    width: 100%;
+    background-color: orange;
+    box-shadow: 0 8px 6px -6px black;
+    justify-content: space-between;
+    height: 5em;
+}
+body{
+    font-family: 'Titillium Web', sans-serif;
+    background-color: rgba(255, 208, 0, 0.445);
+}
+.logo{
+    font-size: 44px;
+padding: 5px;
+margin: 10px;
+width: 20%;
+text-align: center;
+
+font-family: 'Kufam', cursive;
+background-color: rgb(241, 150, 2);
+}
+.nav{
+    display: inline-flex;
+    width: 100%;
+}
+.nav-button{
+    display: inline-block;
+}
+
+nav{
+    display: flex;
+    width: 49%;
+}
+
+.slogan{
+    font-size: 25px;
+    padding: 8px;
+    margin: 22px;
+    width: 30%;
+    font-family: 'Long Cang', cursive;
+    font-weight: lighter;
+    padding-left: 0px;
+    margin-left: 0%;
+}
+body{
+    background-image: url("../images/double-bubble.png");
+    margin:0px;
+    padding: 0px;
+}
+.nav-button a {
+  background-color: rgb(241, 150, 2);
+  color: rgb(17, 17, 17);
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-flex;
+}
+
+.nav-button a:hover {
+    border-bottom: solid;
+    background-color: rgba(241, 149, 2, 0);
+    border-bottom-width: 5px;
+    border-bottom-color: seashell;
+    transition: ease-out, border-bottom-width 0.3s;
+}
+
+.small-icon {
+    width: 32px;
+    padding-left: 1em;
+}
+
+.list{
+    width: 96%;
+    margin-left: 2%;
+    background-color:
+    rgba(255, 255, 255, 0.479);
+    border-radius: 10px;
+    margin-top: 2%;
+    display: flex;
+    flex-direction: column;
+}
+.jobCard{
+    background-color:
+    rgba(255, 255, 255, 0.411);
+    width: 100%;
+    display: inline-flex;
+    margin-bottom: 1em;
+    border-radius:10px;
+    
+}
+.jobImage{
+    width: 30%;
+    height: auto;
+    max-width: 250px; 
+    max-height: 250px;
+    border-radius: 8px;
+    box-shadow: 6px 7px 9px -6px gray;
+}
+.info{
+    width: 60%;
+    text-align: left;
+    padding-left: 2em;
+    padding-right: 2em;
+}
+.infoUser{
+    width: 80%;
+    display: inline-flex;
+    justify-content: space-between;
+}
+.infoUser p {
+    background-color:
+rgba(213, 213, 213, 0.281);
+border-radius: 6px;
+padding: 0.55em;
+max-height: 2em;
+}
+.actions{
+    margin: 3em;
+    margin-top: 3em;
+margin-top: 5%;
+}
+
+.price{
+    font-size: 40px;
+margin: 0px;
+padding-top: 1em;
+}
+
+.infoJob{
+    /*font-family: 'Caveat', cursive;*/
+    font-size: 18px;
+}
+
+.infoJob h3{
+    /*font-family: 'Caveat', cursive;*/
+    font-size: 30px;
+    margin:0px;
+}
+
+.accept-button{
+    padding: 0.4em;
+    color: white;
+    font-family: 'Pacifico', cursive;
+        background-color: rgb(125, 205, 50);
+    border-radius: 10px;
+    border:none;
+    font-size: 30px;
+    box-shadow: 6px 7px 9px -6px gray;}
+
+.tags ul{
+        list-style: none;
+        display: inline-flex;
+}
+.tag{
+    text-decoration: none;
+    background-color:rgb(199, 247, 169);
+    border-radius: 6px;
+    padding: .5em;
+    width: min-content;
+    margin-left: 0.6em;
+    font-size: 15px;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+.tag:first-child{
+    margin-left: 0px;
+}
+.title{
+    margin:0px;
+}
+
+.form section input{
+    width: 70%;
+    margin-bottom: 1em;
+    margin-left: 15%;
+}
+.searchDiv{
+    display: flex;
+    justify-content: center;
+    padding: 0.1em;
+    padding: .5em;
+}
+.searchBox{
+    width: 70%;
+    height: 3.2em;
+    border: solid;
+    border-width: 3px;
+    border-color:rgb(241, 150, 2);
+    border-radius: 44px;
+    background-color: white;
+    display: flex;
+    justify-content: left;
+}
+#searchInput{
+    height: auto;
+    width: 40%;
+    border:none;
+    margin-left: 3%;
+    font-size: larger;
+}
+
+.search-job{
+    margin-left: 0.5em;
+}
