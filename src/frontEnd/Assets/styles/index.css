@@ -71,12 +71,12 @@ body{
 }
 
 .list{
-    width: 96%;
-    margin-left: 2%;
+    width: 98%;
+    margin-left: 1%;
     background-color:
     rgba(255, 255, 255, 0.479);
     border-radius: 10px;
-    margin-top: 2%;
+    margin-top: 0;
     display: flex;
     flex-direction: column;
 }
@@ -122,9 +122,10 @@ margin-top: 5%;
 }
 
 .price{
-    font-size: 40px;
-margin: 0px;
-padding-top: 1em;
+    font-size: 25px;
+margin: -30px;
+padding-top: 2em;
+padding-left: 1em;
 }
 
 .infoJob{
@@ -162,6 +163,7 @@ padding-top: 1em;
     font-size: 15px;
     padding-left: 1em;
     padding-right: 1em;
+    list-style: none;
 }
 .tag:first-child{
     margin-left: 0px;
@@ -202,4 +204,80 @@ padding-top: 1em;
 
 .search-job{
     margin-left: 0.5em;
+
 }
+/*_____________________ACEPTAR TRABAJO:LIST____________________________*/
+
+.workDetails{
+    float: left;
+    display: none;
+    background-color: rgb(245, 245, 245);
+    width: 80%;
+    margin-left: 10%;
+    align-content: flex-start;
+    text-align: center;
+    flex-direction: column;
+    position: absolute;
+    height: 0;
+    border-radius: 10px;
+    opacity: 0;
+}
+#recruiterInfo{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+}
+#workInfo{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: center;
+}
+.listDiv{
+    position: relative;
+}
+.recruiterImage {
+    width: 6em;
+    padding-top: 1em;
+    border-radius: 100%;
+    height: 6em;
+}
+#recruiterName{
+    padding-left: 1em;
+    padding-top: 0.2em;
+    font-size: xx-large;
+}
+#workDesc {
+    width: 90%;
+}
+.recruiter-starring {
+    width: 2em;
+
+font-size: xx-large;
+
+padding-top: 0.3em;
+
+}
+.easeIn{
+    display: flex;
+    opacity: 1;
+    height: 28em;
+    transition: 1s,ease-in;
+}
+.starImage{
+    width: 2em;
+    padding-left: 3em;
+}
+
+.acceptSelectedWork{
+    padding: 0.4em;
+    color: white;
+    font-family: 'Pacifico', cursive;
+        background-color: rgb(125, 205, 50);
+    border-radius: 10px;
+    border:none;
+    font-size: 30px;
+    box-shadow: 6px 7px 9px -6px gray;}

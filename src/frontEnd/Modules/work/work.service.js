@@ -18,9 +18,9 @@ class WorkService{
         this.user = JSON.parse(data).user;
         return data;
     }
-    uploadWork = ({jobName,jobDesc,jobLabels,jobPay,userLocation}) =>{
-        console.log(jobPay,jobLabels,jobDesc);
-        const job = new Job(this.user.uuid,jobName,jobDesc,userLocation,this.mapService.lat,this.mapService.lon,jobPay,jobLabels);
+    uploadWork = ({jobName,jobDesc,jobLabels,jobPay,userLocation,photo}) =>{
+        const job = new Job(this.user.uuid,jobName,jobDesc,userLocation,this.mapService.lat,this.mapService.lon,jobPay,jobLabels,photo);
+        console.log(job);
         this.httpService.post('http://127.0.0.1:3003/create/job',job).then(console.log('Trabajo creado.'));
     }
 

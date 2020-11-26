@@ -13,11 +13,15 @@ class LoginView {
            passwordRegister:document.getElementById('register-password'),
            address:document.getElementById('address'),
            bornDate:document.getElementById('bornDate'),
-           photo:document.getElementById('registerForm'),
+           photo:document.getElementById('photo'),
            loginSubmit: document.getElementById('loginSubmit'),
            registerSubmit: document.getElementById('registerSubmit'),
            popup: L.popup()
         };
+        
+/*         const compress = new Compress();
+
+        compress.attach('#photo', {size: 1,quality: .75}); */
 
         this.lat = 0;
         this.lon = 0;
@@ -96,7 +100,7 @@ class LoginView {
             handler(this.getRegisterData());
         })
     }
-    getRegisterData = () => {
+    getRegisterData = async () => {
         let lat = this.lat;
         let lon = this.lon;
         const name = this.GUI.name.value;
@@ -105,7 +109,15 @@ class LoginView {
         const password = this.GUI.passwordRegister.value;
         const address = this.GUI.address.value;
         const bornDate = this.GUI.bornDate.value;
-        const photo = this.GUI.photo.value;
-        return new User(nick,name,email,password,address,lat,lon,bornDate,photo);
+        const photo = await this.toBase64(this.GUI.photo.files[0]);
+        let user = new User(nick,name,email,password,address,lat,lon,bornDate,photo);
+        return user;
     }
+
+    toBase64 = file => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+    });
 }

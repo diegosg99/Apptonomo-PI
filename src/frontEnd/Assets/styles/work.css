@@ -71,3 +71,9 @@ label{
     height: 100%;
     opacity: 0;
 }
+.jobUserImage{
+    width: 4em;
+    height: 4em;
+    border-radius: 100%;
+    padding-top: 0.5em;
+}

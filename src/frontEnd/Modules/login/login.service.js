@@ -14,9 +14,10 @@ class LoginService {
         this.localStorage.setItem('token',token);
         this.checkPassword(password,data.user.password) ? window.location.hash = 'list' :this.errorMsg();
     }
-    register = (user)=>{
-        this.httpService.post("http://127.0.0.1:3003/register/user",user);
-    }
+    register = async (user)=>{
+        this.httpService.post("http://127.0.0.1:3003/register/user",await user);
+        //window.location.hash = '#list';
+        }
 
     checkPassword = (writed,stored)=>{
             return writed===stored;   

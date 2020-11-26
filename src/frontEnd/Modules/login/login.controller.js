@@ -19,7 +19,6 @@ class LoginController {
         this.service.register(data);
     }
     handlerAccept = () => {
-        //alert("¡Se ha añadido tu domicilio!");
         let popup = document.createElement("div");
         let text = document.createTextNode("¡Se ha añadido tu domicilio!");
         popup.appendChild(text);

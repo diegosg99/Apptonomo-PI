@@ -5,6 +5,8 @@ class ListService {
         this.lockService = lockService;
         this.key= "";
         this.userInfo ="";
+        this.works = [];
+        this.selectedWork = "";
     }
 
     getCurrentUser = () => {
@@ -13,15 +15,34 @@ class ListService {
         .then(data => data);
     }
 
-    getLocalWorks = async (email) => {
-        let userInfo = await this.httpService.post("http://127.0.0.1:3003/user/location",{"email":email})
+     getLocalWorks = async (email) => {
+        this.userInfo = await this.httpService.post("http://127.0.0.1:3003/user/location",{"email":email})
         .then(data=> JSON.parse(data).user);
-        let userNearJobsJSON = await this.httpService.post("http://127.0.0.1:3003/works/latest",{"lat":userInfo.lat,"lon":userInfo.lon});
-        let userNearJobs = JSON.parse(userNearJobsJSON).user;
-        let html = "";
-        userNearJobs.forEach(job => {
-            html += '<section class="jobCard"><img class="jobImage" src="./Assets/images/lavabo.webp"><div class="info"><div class="infoUser"><p>Diego Silva Gómez</p><p>Santa Barbara, Plaza Juan Gómez Bloque 8 Bajo 2</p><h3 class="price">20€</h3></div><div class="infoJob"><h3>Arreglar la tubería de mi baño</h3><div class="tags"><ul><li class="tag">Fontanero</li><li class="tag">Rápido</li></ul></div><p class="title">Necesito a alguien que me arregle un agujero en la tubería y que sea capaz de soldarlo.</p></div></div><div class="actions"><button class="accept-button">¡Yo lo hago!</button></div></section> '; 
-        });
+
+        this.works = await this.httpService.post("http://127.0.0.1:3003/works/latest",{"lat":this.userInfo.lat,"lon":this.userInfo.lon}).then(data => JSON.parse(data).user);
+        let html = this.works.reduce((html,job)=>{
+            return html += '<section class="jobCard" id="'+job.idWork+'"><img class="jobImage" src="http://127.0.0.1:3003/works/getImage/'+job.idWork+'"><div class="info"><div class="infoUser"><img class="jobUserImage" src="'+job.userPhoto+'"><p id="'+job.idUser+'">'+job.userName+'</p><p>'+job.location+'</p><h3 class="price">Paga '+job.price+'€</h3></div><div class="infoJob"><h3>'+job.name+'</h3>'+this.createLabelsComponent(job.labels)+'<p class="title">'+job.description+'</p></div></div><div class="actions"><button class="accept-button">¡Yo lo hago!</button></div></section>'; 
+        },"");
         return html;
-    };
+    }; 
+
+    createLabelsComponent = (rawLabels) => {
+        let labels = rawLabels.split(',');
+        let labelsHtml = labels.reduce((html,label) =>{ return html += '<li class="tag">'+label+'</li>';},'<div class="tags"><ul>');
+        labelsHtml += '</ul></div>';
+        return labelsHtml;
+    }
+
+    getSelectedWorkData = (workId) => {
+        let work = this.works.find(work=>work.idWork == workId);
+        this.selectedWork = work;
+        console.log(this.selectedWork);
+        return work;
+    }
+
+    setWorkerToWork = () => {
+        let idWork = this.selectedWork.idWork;
+        let idWorker = this.userInfo.uuid;
+        this.httpService.post('http://127.0.0.1:3003/works/setWorker',{"idWork":idWork,"idWorker":idWorker}).then(alert); 
+    }
 }
