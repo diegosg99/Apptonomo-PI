@@ -7,10 +7,15 @@ class ListController {
     }
 
     initList = async () => {
+        await this.getDataAndPrint()
+        this.bindInputs()
+    }
+    getDataAndPrint = async () => {
         this.key = await this.service.getCurrentUser().then(data=> JSON.parse(data).sub);
         let html = await this.service.getLocalWorks(this.key);
         this.view.printJobs(html);
-        setTimeout(1000);
+    }
+    bindInputs = () => {
         this.view.bindAcceptWorkButton(this.handlerDisplayWork);
         this.view.bindAccept(this.handlerAcceptWork);
         this.view.bindCloseDetails();
@@ -20,5 +25,6 @@ class ListController {
     }
     handlerAcceptWork = () => {
         this.service.setWorkerToWork();
+        this.getDataAndPrint();
     }
 }
