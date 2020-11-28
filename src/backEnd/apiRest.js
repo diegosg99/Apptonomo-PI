@@ -87,7 +87,7 @@ app.post('/data/user', (req, res) => {
 app.post('/works/latest', (req, res) => {
   try {
     const data = req.body;
-      let sql = "SELECT U.name as userName,CONVERT (U.photo USING utf8) as userPhoto,U.rating as userRating,J.*,ST_AsText(J.locationPoint) as Coordinates, (ST_DISTANCE(POINT("+data.lat+","+data.lon+"), J.locationPoint)*1609.34) as distance from jobs as J INNER JOIN users as U ON J.idUser = U.uuid WHERE ST_Distance_Sphere(J.locationPoint, (POINT("+data.lat+","+data.lon+"))) <= (1000 * 1609.34) AND J.idWorker = 'null';";
+    let sql = "SELECT U.name as userName, CONVERT (U.photo USING utf8) as userPhoto, U.rating as userRating, J.*, ST_AsText(J.locationPoint) as coordinates, ST_Distance_Sphere(J.locationPoint, POINT("+data.lat+","+data.lon+")) / 1000 as distance from jobs as J INNER JOIN users as U ON J.idUser = U.uuid HAVING distance < 3 AND J.idWorker = 'null' ORDER BY distance ASC LIMIT 5;";
       connection.query(sql, function(err, rows, fields) {
         if (err) throw err;  
           return res.json({user:rows});

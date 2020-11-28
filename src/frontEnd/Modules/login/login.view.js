@@ -18,11 +18,6 @@ class LoginView {
            registerSubmit: document.getElementById('registerSubmit'),
            popup: L.popup()
         };
-        
-/*         const compress = new Compress();
-
-        compress.attach('#photo', {size: 1,quality: .75}); */
-
         this.lat = 0;
         this.lon = 0;
 

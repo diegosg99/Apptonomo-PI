@@ -27,7 +27,8 @@
     "momentjs": "^2.0.0",
     "mysql": "^2.18.1",
     "node-fetch": "^2.6.0",
-    "requirejs": "^2.3.6"
+    "requirejs": "^2.3.6",
+    "socket.io": "^3.0.3"
   },
   "devDependencies": {
     "gulp": "^4.0.2"

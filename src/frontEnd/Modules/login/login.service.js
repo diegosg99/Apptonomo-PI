@@ -8,7 +8,6 @@ class LoginService {
     login = async ({email,password})=>{
         const jsonData = await this.httpService.post("http://127.0.0.1:3003/login/user",{email:email,password:password});
         const data = JSON.parse(jsonData);
-        
         const token = data.token;
         this.key = data.user.email;
         this.localStorage.setItem('token',token);

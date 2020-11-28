@@ -1,5 +1,5 @@
 class RoutingService {
-   constructor(){
+constructor(){
        this.url = "#";
        this.container = window.document.getElementById('content');
        this.loadeds = [];
@@ -11,20 +11,23 @@ class RoutingService {
            '#exit': 'login'
            }
 
-           window.addEventListener('hashchange',(e) => {
-            this.url = window.location.hash;
-            this.render(this.url)
+        window.addEventListener('hashchange',async (e) => {
+        this.url = window.location.hash;
+        await this.render(this.url)
         });
-       this.render(this.url); 
+
+        //location.hash = '#';
+        this.render(this.url); 
                 
    }            
 
    render = async  (url) => {
        let path = 'Templates/' + this.routes[url] + '.html';
        console.log(path);
-    await fetch(path)
+    fetch(path)
        .then(response => {return response.text()})
        .then(data => {this.container.innerHTML = data;})
+       .then(setTimeout(1000))
        .then(this.completeScripts(url));
    }
 
@@ -37,10 +40,14 @@ class RoutingService {
 
     this.loadeds.includes(this.routes[this.url]) ? this.loadeds : this.loadeds = [...this.loadeds,this.routes[this.url]];
 
-     this.removeUnusedScripts();
-     this.createScriptTag(service);        
-     this.createScriptTag(view);        
-     this.createScriptTag(controller);        
+    this.removeUnusedScripts();
+    setTimeout(500);
+     this.createScriptTag(service);
+    setTimeout(500);
+     this.createScriptTag(view);
+    setTimeout(500);
+     this.createScriptTag(controller);
+    setTimeout(500);
      this.createScriptTag(app);   
    }
 
