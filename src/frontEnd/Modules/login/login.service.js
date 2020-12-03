@@ -14,14 +14,15 @@ class LoginService {
         this.checkPassword(password,data.user.password) ? window.location.hash = 'list' :this.errorMsg();
     }
     register = async (user)=>{
-        this.httpService.post("http://127.0.0.1:3003/register/user",await user);
-        //window.location.hash = '#list';
+        this.httpService.post("http://127.0.0.1:3003/register/user",await user)
+        .then(JSON.parse())
+        .then(({msg})=>msg==="Error"?swal("Fallo en el registro","O la foto pesa demasiado o estas usando un email ya existente","error","Probare de nuevo"):swal("Te has registrado","¡Empieza a ganar dinero!","succes"));
         }
 
     checkPassword = (writed,stored)=>{
             return writed===stored;   
     }
     errorMsg = () => {
-        alert('Las credenciales no son correctas...')
+        swal('Fallo al iniciar sesion',"Las credenciales introducidas no son correctas...","Error")
     }
 }

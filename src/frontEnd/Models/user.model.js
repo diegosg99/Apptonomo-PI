@@ -1,11 +1,12 @@
 class User {
-      constructor(nick,name,email,password,address,lat,lon,date,photo = null,rating = null){
+      constructor(nick,name,email,password,phone,address,lat,lon,date,photo = null,rating = null){
           
           this.uuid	= this.uuidv4()
           this.nick = nick;	
           this.name = name;	
           this.email = email;	
           this.password	= password;
+          this.phone = phone;
           this.address = address;
           this.lat=lat;	
           this.lon=lon;	

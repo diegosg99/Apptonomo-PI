@@ -40,11 +40,11 @@ app.post('/register/user', (req, res) => {
   try 
   {
     const user = req.body;
-      let sql = 'INSERT INTO users VALUES ("'+user.uuid+'","'+user.nick+'","'+user.name+'","'+user.email+'","'+user.password+'","'+user.address+'",POINT('+user.lat+','+user.lon+'),'+user.lat+',"'+user.lon+'","'+user.bornDate+'","'+user.photo+'",'+user.rating+');';
+      let sql = 'INSERT INTO users VALUES ("'+user.uuid+'","'+user.nick+'","'+user.name+'","'+user.email+'","'+user.password+'","'+user.phone+'",'+user.address+'",POINT('+user.lat+','+user.lon+'),'+user.lat+',"'+user.lon+'","'+user.bornDate+'","'+user.photo+'",'+user.rating+');';
       mysqlQuery(sql);
-      return res.status(200).send({msg:"Usuario subido con éxito."});
+      res.status(200).send({msg:"Usuario subido con éxito."});
     }catch(error){
-      return res.status(400).send({msg:"Error"});
+      res.status(400).send({msg:"Error"});
     }
 });
 
@@ -97,9 +97,40 @@ app.post('/works/latest', (req, res) => {
     }
 });
 
+app.post('/works/filtered', (req, res) => {
+  try {
+    const data = req.body;
+    let sql = "SELECT U.name as userName, CONVERT (U.photo USING utf8) as userPhoto, U.rating as userRating, J.*, ST_AsText(J.locationPoint) as coordinates, ST_Distance_Sphere(J.locationPoint, POINT("+data.lat+","+data.lon+")) / 1000 as distance from jobs as J INNER JOIN users as U ON J.idUser = U.uuid HAVING distance < 3 AND J.idWorker = 'null' ORDER BY distance ASC LIMIT 5;";
+      connection.query(sql, function(err, rows, fields) {
+        if (err) throw err;  
+          return res.json({user:rows});
+        });
+    }catch(error){
+      return res.status(400).send({msg:"Error"});
+    }
+});
+
+app.get('/users/getImage/:id', (req, res) => {
+  try {
+    const data = req.params.id;
+    let sql = "SELECT CONVERT(U.photo USING utf8) as photo from users as U WHERE U.uuid = '"+data+"';";
+    connection.query(sql, function(err, rows, fields) {
+        if (err) throw err;  
+        const im = rows[0].photo.split(",")[1];
+        const image = Buffer.from(im,'base64');
+        res.setHeader('Content-Type','image/png');
+        res.setHeader('Content-Lenght',rows[0].length)
+        res.status(200).send(image);
+        });
+    }catch(error){
+      return res.status(400).send({msg:"Error"});
+    }
+});
+
 app.get('/works/getImage/:id', (req, res) => {
   try {
     const data = req.params.id;
+    console.log(data);
     let sql = "SELECT CONVERT(J.photo USING utf8) as photo from jobs as J WHERE idWork = '"+data+"';";
     connection.query(sql, function(err, rows, fields) {
         if (err) throw err;  
@@ -127,15 +158,74 @@ app.post('/works/setWorker', (req, res) => {
     }
 });
 
+app.post('/profile/user/photo',(req,res)=>{
+  try{
+    const data = req.body;
+    console.log(data);
+    let sql = "UPDATE users SET photo = '"+data.photo+"' WHERE uuid = '"+data.id+"';";
+    connection.query(sql, function(err, rows, fields) {
+        if (err) throw err;  
+        res.status(200).send({msg:"Foto cambiada."});
+        });
+  }catch(error){
+    res.status(400).send({msg:"Error"});
+  }
+})
+
+app.post('/profile/user/info', (req, res) => {
+  try {
+    const data = req.body;
+      let sql = 'SELECT uuid,name,address,rating from users WHERE email = "'+data.email+'";';
+      connection.query(sql, function(err, rows, fields) {
+        if (err) throw err;  
+        res.json(rows[0]);
+      });     
+      res.status(200);
+      }catch(error){
+      return res.status(400).send({msg:"Error"});
+    }
+});
+
+app.post('/profile/user/waiting', (req, res) => {
+  try {
+    const data = req.body;
+    let sql = 'SELECT idWork,idUser,idWorker,name, price from jobs WHERE idUser= "'+data.id+'";';
+    connection.query(sql, function(err, rows, fields) {
+      if (err) throw err;  
+      res.json(rows);
+      });  
+      res.status(200);
+      }catch(error){
+      return res.status(400).send({msg:"Error"});
+    }
+});
+
+app.post('/profile/user/accepted', (req, res) => {
+  try {
+    const data = req.body;
+    let sql = 'SELECT idWork,idUser,idWorker,name, price from jobs WHERE idWorker= "'+data.id+'";';
+    connection.query(sql, (err, rows, fields) => {
+      res.json(rows);
+    });     
+      res.status(200);
+      }catch(error){
+      return res.status(400).send({msg:"Error"});
+    }
+});
+
+
+/* 
+
+ */
 
 app.post('/create/job', (req, res) => {
   try {
     const data = req.body;
       let sql = "INSERT INTO jobs (idWork, idUser, idWorker, name, location,locationPoint,lat,lon, labels,description,price,photo,done) VALUES ('"+data.idWork+"', '"+data.idUser+"', '"+data.idWorker+"', '"+data.name+"', '"+data.location+"', POINT ("+data.lat+","+data.lon+"), "+data.lat+", "+data.lon+", '"+data.labels+"','"+data.description+"',"+data.price+",'"+data.photo+"',0);";
       mysqlQuery(sql);
-      return res.status(200);
+      res.status(200).send("Tranajo subido");
     }catch(error){
-      return res.status(400).send({msg:"Error"});
+      res.status(400).send({msg:"Error"});
     }
 });
 

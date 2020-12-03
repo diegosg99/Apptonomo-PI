@@ -52,10 +52,10 @@ class MapService {
     }
 
     handlerAccept = () => {
-        let url = "https://nominatim.openstreetmap.org/reverse?format=json&lat="+this.lat+"&lon="+this.lon+"&zoom=18&addressdetails=1";
+        let url = 'https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat='+this.lat+'&lon='+this.lon+'&zoom=17';
         this.httpService.get(url)
         .then((location) => JSON.parse(location))
-        .then(({address}) => this.GUI.address.value = address.borough+", "+address.city+", "+address.country+" "+address.postcode)
+        .then(({address}) => this.GUI.address.value = address.road+", "+address.neighbourhood+", "+address.city+", "+address.state)
         .then(this.GUI.info.innerHTML = "¡Se ha marcado el destino!")
         .then(this.GUI.locationButtons.setAttribute('hidden',true))
         .then(this.displayInfo());

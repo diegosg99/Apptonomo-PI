@@ -24,11 +24,10 @@ constructor(){
    render = async  (url) => {
        let path = 'Templates/' + this.routes[url] + '.html';
        console.log(path);
-    fetch(path)
+    let data = await fetch(path)
        .then(response => {return response.text()})
-       .then(data => {this.container.innerHTML = data;})
-       .then(setTimeout(1000))
-       .then(this.completeScripts(url));
+    this.container.innerHTML = data;
+    this.completeScripts(url);
    }
 
    completeScripts = (url) => {
@@ -52,6 +51,7 @@ constructor(){
    }
 
    createScriptTag = (url) => {
+       console.log(url);
        let script = document.createElement("script"); 
        script.setAttribute('src',url);
        script.setAttribute('class',this.routes[this.url]);

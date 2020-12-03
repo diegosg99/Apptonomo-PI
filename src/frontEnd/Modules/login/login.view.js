@@ -11,6 +11,7 @@ class LoginView {
            passwordLogin:document.getElementById('login-password'),
            emailRegister:document.getElementById('register-email'),
            passwordRegister:document.getElementById('register-password'),
+           phone:document.getElementById('register-phone'),
            address:document.getElementById('address'),
            bornDate:document.getElementById('bornDate'),
            photo:document.getElementById('photo'),
@@ -54,7 +55,9 @@ class LoginView {
 
     show = (register) => {
         if (register){
+            console.log(this.GUI.login);
                 this.GUI.login.removeAttribute("class");
+                console.log(this.GUI.login);
                 this.GUI.login.setAttribute('class','invisible');
                 this.GUI.register.setAttribute('class','register');
         }else{
@@ -102,10 +105,11 @@ class LoginView {
         const nick = this.GUI.nick.value;
         const email = this.GUI.emailRegister.value;
         const password = this.GUI.passwordRegister.value;
+        const phone = this.GUI.phone.value;
         const address = this.GUI.address.value;
         const bornDate = this.GUI.bornDate.value;
         const photo = await this.toBase64(this.GUI.photo.files[0]);
-        let user = new User(nick,name,email,password,address,lat,lon,bornDate,photo);
+        let user = new User(nick,name,email,password,phone,address,lat,lon,bornDate,photo);
         return user;
     }
 

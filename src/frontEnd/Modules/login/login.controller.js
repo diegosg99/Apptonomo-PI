@@ -6,6 +6,7 @@ class LoginController {
         this.view.bindSubmitRegister(this.handlerSubmitRegister);
         this.view.initMap();
         this.view.bindLocationButtons([this.handlerAccept,this.handlerDeny]);
+        this.view.show(false);
     }
     registerNewUser = () => {
         const user = this.view.getRegisterData();

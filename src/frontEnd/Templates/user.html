@@ -1,33 +1,65 @@
 
 <article class="list">
+    <div id="workDetails" class="workDetails">
+        <div class="imageDiv">
+            <img id="workImage" class="workImage" src="">
+        </div>
+        <div class="workInfo">
+            <div id="recruiterInfo">
+                <img id="recruiterImage" class="recruiterImage" src="">
+
+                <p id="recruiterName">Diego Silva</p>
+                <div class="starringDiv">
+                    <img class="starImage" src="./Assets/images/star.svg">
+                    <p id="recruiter-starring" class="recruiter-starring">5/5</p>
+                </div>
+                <button id="closeDetails" class="closeDetails">X</button>    
+            </div>
+            <div id="workInfo">
+                <p id="workName"></p>
+                <p id="workLocation">Su casa</p>
+                <p id="workPay">10€</p>
+                <br>
+                <p id="workLabels">Mecanico,patólogo</p>
+                <br>
+            </div>
+                <p id="workDesc">Necesito a alguien que pueda acercarse a ver a mis patos, porque creo que estan mal, los veo estornudar o algo parecido.</p>
+            <div id="workActions">
+                <button id="accept" class="acceptSelectedWork">!Yo lo hago¡</button>
+            </div>
+        </div>            
+    </div>
+
+<!-- ***************************************************************************************************** -->
+
     <section class="userProfile">
         <div class="userInfoContainer">
             <p class="name" id="userName">Diego Silva Gómez</p>
-            <img class="userImage" src="./Assets/images/IMG-20170306-WA0038.jpg">
+            <div>
+                <img id="userImage" class="userImage" src="./Assets/images/IMG-20170306-WA0038.jpg">
+                <label id="changeImageLabel" class="custom-file-upload">
+                    <input id="changeImage" type="file"/>
+                    <img class="photoIcon" src="./Assets/images/camera.svg">
+                </label>
+            </div>
             <p class="location" id="userLocation">Málaga, plaza Juan Gómez Juanito Bq8 Bajo 2</p>
         </div> 
         <div class="starring">
             <img src="./Assets/images/star.svg" class="star"><p class="starNumber" id="starNumber">5/5</p>
         </div>
-         <div class="info">
-             <div class="infoUser">
-                <p>Diego Silva Gómez</p>
-                <p>Santa Barbara, Plaza Juan Gómez Bloque 8 Bajo 2</p>
-                <h3 class="price">20€</h3>
-            </div>
-            <div class="infoJob">
-                <h3>Arreglar la tubería de mi baño</h3>
-                <div class="tags">
-                    <ul>
-                        <li class="tag">Fontanero</li>
-                        <li class="tag">Rápido</li>
-                    </ul>
-                </div>
-                <p class="title">Necesito a alguien que me arregle un agujero en la tubería y que sea capaz de soldarlo.</p>
+         <div class="worksRelated">
+             <div id="worksWaiting">
+                 <table id="worksWaitingTable">
+                    <tr><th class="worksWaiting">Trabajos publicados</th></tr>
+                    <tr><td>Todavia no has publicado ningún trabajo...</td></tr>
+                 </table id="worksAcceptedTable">
+             </div>
+             <div id="worksAccepted">
+                <table id="worksAcceptedTable">
+                   <tr><th class="worksAccepted">Mis tareas</th></tr>
+                   <tr><td>Todavia no has aceptado ningún...</td></tr>
+                </table>
             </div>
          </div>
-         <!-- <div class="actions">
-             <button class="accept-button">¡Yo lo hago!</button>
-         </div> -->
     </section>  
  </article>

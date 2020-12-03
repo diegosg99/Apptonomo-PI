@@ -1,26 +1,32 @@
-class ListController {
+class userController{
     constructor(view,service){
         this.view = view;
         this.service = service;
         this.key;
-        this.initList();
+        //this.user;
+
+        this.service.lockService.checkToken();
+        this.init();
     }
 
-    initList = async () => {
-        await this.getDataAndPrint()
-        this.bindInputs()
+    init = async () => {
+        this.key = (await this.service.getCurrentUser()).sub;
+        let data = await this.service.bringRelatedData(this.key);
+        console.log(data);
+        this.view.printTables(data);
+        this.view.bindChangePhoto(this.handlerChangePhoto);
     }
-    getDataAndPrint = async () => {
-        this.key = await this.service.getCurrentUser().then(data=> JSON.parse(data).sub);
-        let html = await this.service.getLocalWorks(this.key);
-        this.view.printJobs(html);
-    }
+
     bindInputs = () => {
         this.view.bindAcceptWorkButton(this.handlerDisplayWork);
         this.view.bindAccept(this.handlerAcceptWork);
         this.view.bindCloseDetails();
     }
-    
+
+    handlerChangePhoto = (file) => {
+        this.service.changePhoto(file)
+    }
+
     handlerDisplayWork = (id) => {
         return this.service.getSelectedWorkData(id);
     }
@@ -28,4 +34,5 @@ class ListController {
         this.service.setWorkerToWork();
         this.getDataAndPrint();
     }
+
 }

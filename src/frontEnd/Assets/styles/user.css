@@ -34,3 +34,177 @@
 .star{
     width: 50px;
 }
+.worksRelated{
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-around;
+}
+#worksWaiting{
+    width: 35%;
+    background-color: rgba(255, 166, 0, 0.904);
+}
+#worksAccepted{
+    width: 35%;
+    background-color: rgba(248, 212, 51, 0.904);
+}
+#worksWaiting table th{
+    border:solid;
+    border-width: 0px;
+    border-bottom-width: 1px;
+    border-bottom-color: rgb(236, 155, 4);
+}
+#worksAccepted table th{
+    border:solid;
+    border-width: 0px;
+    border-bottom-width: 1px;
+    border-bottom-color: rgb(236, 201, 4);
+}
+#worksWaiting table{
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+}
+#worksAccepted table{
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+}
+
+
+/*________________________________________________________________*/
+
+.workDetails{
+    float: left;
+    display: none;
+    background-color: rgb(245, 245, 245);
+    width: 80%;
+    margin-left: 10%;
+    align-content: flex-start;
+    text-align: center;
+    flex-direction: column;
+    position: absolute;
+    height: 0;
+    border-radius: 10px;
+    opacity: 0;
+    justify-content: left;
+    box-shadow: 2px 5px 225px 140px rgba(106, 106, 106, 0.705);
+}
+#recruiterInfo{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: center;
+    width: 100%;
+}
+#workInfo{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    text-align: center;
+}
+.listDiv{
+    position: relative;
+}
+.recruiterImage {
+    width: 6em;
+    padding-top: 1em;
+    border-radius: 100%;
+    height: 6em;
+}
+#recruiterName{
+    padding-left: 1em;
+    padding-top: 0.2em;
+    font-size: xx-large;
+}
+
+.recruiter-starring {
+    width: 2em;
+
+font-size: xx-large;
+
+padding-top: 0.3em;
+
+}
+.easeIn{
+    display: inline-flex;
+    opacity: 1;
+    height: 22em;
+    transition: 1s,ease-in;
+    flex-direction: row;
+}
+.starImage{
+    width: 2em;
+    padding-left: 3em;
+}
+
+.acceptSelectedWork{
+    padding: 0.4em;
+    color: white;
+    font-family: 'Pacifico', cursive;
+        background-color: rgb(125, 205, 50);
+    border-radius: 10px;
+    border:none;
+    font-size: 30px;
+    box-shadow: 6px 7px 9px -6px gray;}
+    
+
+    .imageDiv{
+        width: 33%;
+        min-height: 22em;
+    }
+    .workInfo{
+        width: inherit;
+    }
+    .workImage{
+        width: 100%;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        box-shadow: 0px,10px,10px,10px;
+    }
+    .closeDetails{
+        height: 3em;
+    width: 5em;
+    text-align: center;
+    border: none;
+    border-top-right-radius: 8px;
+    border-bottom-left-radius: 12px;
+
+    }
+
+    .closeDetails:hover{
+        height: 3em;
+        width: 5em;
+        text-align: center;
+        border: none;
+        border-bottom-left-radius: 12px;
+        border-top-right-radius: 8px;
+
+        background-color: rgba(238, 9, 9, 0.767);
+        transition: background-color 0.3s ease-out;
+    }
+
+    .starringDiv{
+        display: inline-flex;
+        justify-content: space-around;
+    }
+
+    #changeImage{
+        display: none;
+    }
+    .custom-file-upload {
+        border: 1px solid #ccc;
+        display: inline-block;
+        padding: 6px 12px;
+        cursor: pointer;
+        margin:0 auto;
+        width: 1.5em;
+        max-height: 1.5em;
+        border-radius: 100%;
+        background-color: rgba(92, 252, 0, 0.726);
+        text-align: center;
+        font-size: x-large;
+    }
+    .photoIcon{
+        width: 1em;
+    }

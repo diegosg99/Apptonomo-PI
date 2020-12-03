@@ -11,7 +11,7 @@ class ListView {
             workLabels: document.getElementById('workLabels'),
             workDesc: document.getElementById('workDesc'),
             workImage: document.getElementById('workImage'),
-            starring: document.getElementById('starring'),
+            starring: document.getElementById('recruiter-starring'),
             accept: document.getElementById('accept'),
             closeDetails: document.getElementById('closeDetails')
         };
@@ -29,6 +29,7 @@ class ListView {
             });    
         });
     }
+
     displayWorkDetails = (work,e) => {
         console.log(work);
         this.GUI.workDetails.classList.add('easeIn');
@@ -37,9 +38,11 @@ class ListView {
         this.GUI.recruiterName.innerHTML = work.userName;
         this.GUI.workDesc.innerHTML = work.description;
         this.GUI.workLocation.innerHTML = work.location;
-        this.GUI.workPay.innerHTML = work.price;
+        this.GUI.workPay.innerHTML = work.price+"€";
+        this.GUI.starring.innerHTML = (work.userRating)==null?"0/5":work.userRating+"/5";
         this.GUI.workLabels.innerHTML = work.labels;
-        this.GUI.workImage.setAttribute('src',"");
+        console.log(work.id);
+        this.GUI.workImage.setAttribute('src',"http://127.0.0.1:3003/works/getImage/"+work.idWork);
         this.GUI.workName.innerHTML = work.name;
     }
 
