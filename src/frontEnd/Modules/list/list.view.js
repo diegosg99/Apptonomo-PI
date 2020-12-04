@@ -13,7 +13,8 @@ class ListView {
             workImage: document.getElementById('workImage'),
             starring: document.getElementById('recruiter-starring'),
             accept: document.getElementById('accept'),
-            closeDetails: document.getElementById('closeDetails')
+            closeDetails: document.getElementById('closeDetails'),
+            searchInput: document.getElementById('searchInput')
         };
     }
     printJobs = (jobs) =>{
@@ -31,9 +32,8 @@ class ListView {
     }
 
     displayWorkDetails = (work,e) => {
-        console.log(work);
         this.GUI.workDetails.classList.add('easeIn');
-        let section = e.target.parentNode.parentNode.id;
+        //let section = e.target.parentNode.parentNode.id;
         this.GUI.recruiterImage.setAttribute('src',work.userPhoto);
         this.GUI.recruiterName.innerHTML = work.userName;
         this.GUI.workDesc.innerHTML = work.description;
@@ -41,7 +41,6 @@ class ListView {
         this.GUI.workPay.innerHTML = work.price+"€";
         this.GUI.starring.innerHTML = (work.userRating)==null?"0/5":work.userRating+"/5";
         this.GUI.workLabels.innerHTML = work.labels;
-        console.log(work.id);
         this.GUI.workImage.setAttribute('src',"http://127.0.0.1:3003/works/getImage/"+work.idWork);
         this.GUI.workName.innerHTML = work.name;
     }
@@ -61,4 +60,12 @@ class ListView {
     closeWorkDetails = () => {
         this.GUI.workDetails.classList.remove('easeIn');
     }
+
+    bindFilterInput = (handler) => {
+        this.GUI.searchInput.addEventListener('keyup',(e)=>{
+            handler(e.target.value);
+            });
+        
+    }
+
 }

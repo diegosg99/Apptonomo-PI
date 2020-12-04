@@ -29,7 +29,6 @@ class ListService {
 
     getFilteredWorks = async (filter) => {
         this.works = await this.httpService.post("http://127.0.0.1:3003/works/filtered",{"filter":filter,"lat":this.userInfo.lat,"lon":this.userInfo.lon}).then(data => JSON.parse(data).user);
-        console.log(this.works);
         let html = this.works.reduce((html,job)=>{
             return html += '<section class="jobCard" id="'+job.idWork+'"><img class="jobImage" src="http://127.0.0.1:3003/works/getImage/'+job.idWork+'"><div class="info"><div class="infoUser"><img class="jobUserImage" src="'+job.userPhoto+'"><p id="'+job.idUser+'">'+job.userName+'</p><p>'+job.location+'</p><h3 class="price">Paga '+job.price+'€</h3></div><div class="infoJob"><h3>'+job.name+'</h3>'+this.createLabelsComponent(job.labels)+'<p class="title">'+job.description+'</p></div></div><div class="actions"><button class="accept-button">¡Yo lo hago!</button></div></section>'; 
         },"");
@@ -46,7 +45,6 @@ class ListService {
     getSelectedWorkData = (workId) => {
         let work = this.works.find(work=>work.idWork == workId);
         this.selectedWork = work;
-        console.log(this.selectedWork);
         return work;
     }
 

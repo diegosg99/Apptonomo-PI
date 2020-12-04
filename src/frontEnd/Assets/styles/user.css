@@ -138,7 +138,7 @@ padding-top: 0.3em;
     padding-left: 3em;
 }
 
-.acceptSelectedWork{
+.endSelectedWork{
     padding: 0.4em;
     color: white;
     font-family: 'Pacifico', cursive;
@@ -207,4 +207,18 @@ padding-top: 0.3em;
     }
     .photoIcon{
         width: 1em;
+    }
+    .cancelSelectedWork{
+        padding: 0.4em;
+        color: white;
+        font-family: 'Pacifico', cursive;
+            background-color: rgb(205, 60, 50);
+        border-radius: 10px;
+        border:none;
+        font-size: 30px;
+        box-shadow: 6px 7px 9px -6px gray;
+    }
+    #workActions{
+        display: flex;
+        justify-content: space-evenly;
     }

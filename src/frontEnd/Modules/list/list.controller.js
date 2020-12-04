@@ -19,6 +19,7 @@ class ListController {
         this.view.bindAcceptWorkButton(this.handlerDisplayWork);
         this.view.bindAccept(this.handlerAcceptWork);
         this.view.bindCloseDetails();
+        this.view.bindFilterInput(this.handlerFilterInput);
     }
     
     handlerDisplayWork = (id) => {
@@ -27,5 +28,10 @@ class ListController {
     handlerAcceptWork = () => {
         this.service.setWorkerToWork();
         this.getDataAndPrint();
+    }
+    handlerFilterInput =async  (text)=>{
+        let html =await this.service.getFilteredWorks(text);
+        this.view.printJobs(html);
+        this.bindInputs();
     }
 }

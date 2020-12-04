@@ -12,27 +12,40 @@ class userController{
     init = async () => {
         this.key = (await this.service.getCurrentUser()).sub;
         let data = await this.service.bringRelatedData(this.key);
-        console.log(data);
         this.view.printTables(data);
         this.view.bindChangePhoto(this.handlerChangePhoto);
+        this.view.bindAcceptedRows(this.handlerDisplayWork);
+        this.view.bindWaitingRows(this.handlerDisplayWork);
     }
 
     bindInputs = () => {
-        this.view.bindAcceptWorkButton(this.handlerDisplayWork);
-        this.view.bindAccept(this.handlerAcceptWork);
+        //this.view.bindAcceptWorkButton(this.handlerDisplayWork);
         this.view.bindCloseDetails();
+        this.view.bindEnd(this.handlerEnd);
+        this.view.bindCancel(this.handlerCancel);
+        //this.view.bindRate(this.handlerRate);
     }
 
     handlerChangePhoto = (file) => {
         this.service.changePhoto(file)
     }
 
-    handlerDisplayWork = (id) => {
-        return this.service.getSelectedWorkData(id);
+    handlerDisplayWork = async (id) => {
+        let work = await this.service.getSelectedWorkData(id);
+        this.view.displayRelatedWork(work);
+        this.bindInputs();
     }
-    handlerAcceptWork = () => {
-        this.service.setWorkerToWork();
-        this.getDataAndPrint();
+    handlerDisplayAcceptedWork = (id) => {
+        this.service.getWork(id);
     }
-
+    handlerEnd = () => {
+        this.service.endWork();
+    }
+    handlerCancel = () => {
+        this.service.cancelWork();
+    }
+    /* handlerRate = (id) => {
+        let data = {};
+        this.service.rateUser(data);
+    } */
 }

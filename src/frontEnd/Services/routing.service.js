@@ -11,60 +11,53 @@ constructor(){
            '#exit': 'login'
            }
 
-        window.addEventListener('hashchange',async (e) => {
-        this.url = window.location.hash;
-        await this.render(this.url)
-        });
 
-        //location.hash = '#';
-        this.render(this.url); 
+        window.location.hash = '#';
+
+        window.addEventListener('hashchange',(e) => {
+            e.preventDefault();
+            this.url = window.location.hash;
+            this.render()
+        });
+        this.render(); 
                 
    }            
 
-   render = async  (url) => {
-       let path = 'Templates/' + this.routes[url] + '.html';
-       console.log(path);
-    let data = await fetch(path)
-       .then(response => {return response.text()})
-    this.container.innerHTML = data;
-    this.completeScripts(url);
-   }
+   render = async  () => {
+       let path = 'Templates/' + this.routes[this.url] + '.html';
+    fetch(path)
+    .then(response=>response.text())
+    .then(html => this.container.innerHTML = html)
+    .then(this.completeScripts(this.url))
+}
 
-   completeScripts = (url) => {
-    let moduleToLoad = 'Modules/'+this.routes[url]+"/";
-    let service = moduleToLoad+this.routes[url]+".service.js"
-    let view = moduleToLoad+this.routes[url]+".view.js"
-    let controller = moduleToLoad+this.routes[url]+".controller.js"
-    let app = moduleToLoad+this.routes[url]+".app.js"
+   completeScripts = () => {
+    let moduleToLoad = 'Modules/'+this.routes[this.url]+"/";
+    let service = moduleToLoad+this.routes[this.url]+".service.js"
+    let view = moduleToLoad+this.routes[this.url]+".view.js"
+    let controller = moduleToLoad+this.routes[this.url]+".controller.js"
+    let app = moduleToLoad+this.routes[this.url]+".app.js"
 
-    this.loadeds.includes(this.routes[this.url]) ? this.loadeds : this.loadeds = [...this.loadeds,this.routes[this.url]];
+    this.loadeds = this.loadeds.includes(this.routes[this.url]) ? this.loadeds : [...this.loadeds,this.routes[this.url]];
 
     this.removeUnusedScripts();
-    setTimeout(500);
      this.createScriptTag(service);
-    setTimeout(500);
      this.createScriptTag(view);
-    setTimeout(500);
      this.createScriptTag(controller);
-    setTimeout(500);
      this.createScriptTag(app);   
    }
 
    createScriptTag = (url) => {
-       console.log(url);
-       let script = document.createElement("script"); 
+    let script = document.createElement("script"); 
        script.setAttribute('src',url);
-       script.setAttribute('class',this.routes[this.url]);
+       script.setAttribute('class',this.routes[url]);
        document.body.append(script);
    }
 
    removeUnusedScripts = () => {
        const unused = this.loadeds.filter(hash => hash != this.routes[this.url]);
        for (let hash of unused){
-           document.querySelectorAll('.'+hash).forEach(function(elem){
-               elem.remove();
-               })
+           document.querySelectorAll('.'+hash).forEach(elem => {elem.remove();})
        }
    }
-   
 }

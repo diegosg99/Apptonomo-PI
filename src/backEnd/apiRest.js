@@ -96,11 +96,18 @@ app.post('/works/latest', (req, res) => {
       return res.status(400).send({msg:"Error"});
     }
 });
-
 app.post('/works/filtered', (req, res) => {
   try {
     const data = req.body;
-    let sql = "SELECT U.name as userName, CONVERT (U.photo USING utf8) as userPhoto, U.rating as userRating, J.*, ST_AsText(J.locationPoint) as coordinates, ST_Distance_Sphere(J.locationPoint, POINT("+data.lat+","+data.lon+")) / 1000 as distance from jobs as J INNER JOIN users as U ON J.idUser = U.uuid HAVING distance < 3 AND J.idWorker = 'null' ORDER BY distance ASC LIMIT 5;";
+    let sql = `SELECT U.name as userName,
+    CONVERT (U.photo USING utf8) as userPhoto,
+    U.rating as userRating, J.*, ST_AsText(J.locationPoint) as coordinates,
+    ST_Distance_Sphere(J.locationPoint,
+    POINT(${data.lat},${data.lon})) / 1000 as distance 
+    from jobs as J INNER JOIN users as U ON J.idUser = U.uuid 
+    HAVING J.name LIKE '%${data.filter}%' ORDER BY distance ASC LIMIT 5;`;
+    //J.idWorker = 'null' AND to show real data
+    console.log(sql);
       connection.query(sql, function(err, rows, fields) {
         if (err) throw err;  
           return res.json({user:rows});
@@ -119,7 +126,7 @@ app.get('/users/getImage/:id', (req, res) => {
         const im = rows[0].photo.split(",")[1];
         const image = Buffer.from(im,'base64');
         res.setHeader('Content-Type','image/png');
-        res.setHeader('Content-Lenght',rows[0].length)
+        res.setHeader('Content-Lenght',image.length)
         res.status(200).send(image);
         });
     }catch(error){
@@ -130,15 +137,60 @@ app.get('/users/getImage/:id', (req, res) => {
 app.get('/works/getImage/:id', (req, res) => {
   try {
     const data = req.params.id;
-    console.log(data);
     let sql = "SELECT CONVERT(J.photo USING utf8) as photo from jobs as J WHERE idWork = '"+data+"';";
     connection.query(sql, function(err, rows, fields) {
+        if (err) throw err; 
+        if (rows[0].photo != null){
+          const im = rows[0].photo.split(",")[1];
+          const image = Buffer.from(im,'base64');
+          res.setHeader('Content-Type','image/png');
+          res.setHeader('Content-Lenght',image.length)
+          res.status(200).send(image);
+        }
+        });
+    }catch(error){
+      return res.status(400).send({msg:"Error"});
+    }
+});
+
+app.get('/works/getWork/:id', (req, res) => {
+  try {
+    const data = req.params.id;
+    let sql = `SELECT U.name as userName,
+    CONVERT (U.photo USING utf8) as userPhoto,
+    U.rating as userRating, J.*, ST_AsText(J.locationPoint) as coordinates
+    from jobs as J INNER JOIN users as U ON J.idUser = U.uuid
+    WHERE J.idWork = '${data}';`;
+
+    connection.query(sql, function(err, rows, fields) {
+        if (err) throw err; 
+          res.status(200).send(rows[0]);
+        });
+    }catch(error){
+      return res.status(400).send({msg:"Error"});
+    }
+});
+
+app.post('/profile/work/cancel', (req, res) => {
+  try {
+    const data = req.body;
+    let sql = "DELETE FROM jobs WHERE idWork = '"+data.id+"';";
+    connection.query(sql, function(err, rows, fields) {
         if (err) throw err;  
-        const im = rows[0].photo.split(",")[1];
-        const image = Buffer.from(im,'base64');
-        res.setHeader('Content-Type','image/png');
-        res.setHeader('Content-Lenght',image.length)
-        res.status(200).send(image);
+        return res.status(200).send({msg:"Trabajado cancelado."});
+        });
+    }catch(error){
+      return res.status(400).send({msg:"Error"});
+    }
+});
+
+app.post('/profile/work/quitWorker', (req, res) => {
+  try {
+    const data = req.body;
+    let sql = "UPDATE jobs SET idWorker = 'null' WHERE idWork = '"+data.id+"';";
+    connection.query(sql, function(err, rows, fields) {
+        if (err) throw err;  
+        return res.status(200).send({msg:"Te has quitado de la tarea."});
         });
     }catch(error){
       return res.status(400).send({msg:"Error"});
@@ -161,7 +213,6 @@ app.post('/works/setWorker', (req, res) => {
 app.post('/profile/user/photo',(req,res)=>{
   try{
     const data = req.body;
-    console.log(data);
     let sql = "UPDATE users SET photo = '"+data.photo+"' WHERE uuid = '"+data.id+"';";
     connection.query(sql, function(err, rows, fields) {
         if (err) throw err;  
