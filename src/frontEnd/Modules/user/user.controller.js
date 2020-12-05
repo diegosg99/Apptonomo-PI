@@ -23,7 +23,7 @@ class userController{
         this.view.bindCloseDetails();
         this.view.bindEnd(this.handlerEnd);
         this.view.bindCancel(this.handlerCancel);
-        //this.view.bindRate(this.handlerRate);
+        this.view.bindRate(this.handlerRate);
     }
 
     handlerChangePhoto = (file) => {
@@ -38,14 +38,17 @@ class userController{
     handlerDisplayAcceptedWork = (id) => {
         this.service.getWork(id);
     }
-    handlerEnd = () => {
-        this.service.endWork();
+    handlerEnd = async () => {
+        //this.service.endWork();
+        this.view.closeWorkDetails();
+        let user = await this.service.getUserToRateData(this.view.accepted);
+        this.view.printRatingDiv(user);
+        this.view.GUI.ratingUserDiv.classList.add('easeIn');
     }
     handlerCancel = () => {
         this.service.cancelWork();
     }
-    /* handlerRate = (id) => {
-        let data = {};
+    handlerRate = (data) => {
         this.service.rateUser(data);
-    } */
+    }
 }

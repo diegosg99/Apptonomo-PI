@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const jwt = require("jsonwebtoken");
 const cors = require("cors");
 const mysql = require('mysql');
+const moment = require('moment');
 
 const connection = mysql.createConnection({
   host     : 'localhost',
@@ -111,6 +112,60 @@ app.post('/works/filtered', (req, res) => {
       connection.query(sql, function(err, rows, fields) {
         if (err) throw err;  
           return res.json({user:rows});
+        });
+    }catch(error){
+      return res.status(400).send({msg:"Error"});
+    }
+});
+
+app.get('/profile/getUser/:id', (req, res) => {
+  try {
+    const data = req.params.id;
+    let sql = "SELECT U.uuid,U.name,U.phone,U.address,U.rating,U.email,CONVERT(U.photo USING utf8) as photo from users as U WHERE U.uuid = '"+data+"';";
+    connection.query(sql, function(err, rows, fields) {
+        if (err) throw err;
+        res.status(200).send(rows[0]);
+        });
+    }catch(error){
+      return res.status(400).send({msg:"Error"});
+    }
+});
+
+app.post('/profile/rate/user', (req, res) => {
+  try {
+    const data = req.body;
+    let date = moment();
+    let sql = `INSERT INTO ratings VALUES ('${data.idRating}','${data.idJob}','${data.starring}','${data.idUser}','${data.idRated}','${data.comment}','${date}'); `;
+    connection.query(sql, function(err, rows, fields) {
+        if (err) throw err;
+        res.status(200).send({msg:'Usuario valorado'});
+        });
+    }catch(error){
+      return res.status(400).send({msg:"Error"});
+    }
+});
+
+app.get('/profile/rates/getAll/:id',(req,res)=>{
+  try{
+    let id = req.params.id;
+    let sql = `SELECT * FROM ratings WHERE idRated = '${id}';`;
+    connection.query(sql, function(err, rows, fields) {
+        if (err) throw err;
+        res.status(200).send({rows});
+        });
+  }catch(error){
+
+  }
+});
+
+app.post('/profile/rate/refresh', (req, res) => {
+  try {
+    const data = req.body;
+    console.log(data);
+    let sql = `UPDATE users SET rating = ${data.starring} WHERE uuid = '${data.id}';`;
+    connection.query(sql, function(err, rows, fields) {
+        if (err) throw err;
+        res.status(200).send({msg:'Usuario valorado'});
         });
     }catch(error){
       return res.status(400).send({msg:"Error"});
@@ -263,11 +318,6 @@ app.post('/profile/user/accepted', (req, res) => {
       return res.status(400).send({msg:"Error"});
     }
 });
-
-
-/* 
-
- */
 
 app.post('/create/job', (req, res) => {
   try {

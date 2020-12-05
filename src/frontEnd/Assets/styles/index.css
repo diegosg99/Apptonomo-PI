@@ -322,7 +322,64 @@ padding-top: 0.3em;
     .starringDiv{
         display: inline-flex;
         justify-content: space-around;
+        width: 80%;
+        margin-left: 10%;
     }
 
+    .ratingUserDiv{
+        /*display: flex;*/
+        background-color:bisque;
+        float: left;
+        display: none;
+        background-color: rgb(245, 245, 245);
+        width: 80%;
+        margin-left: 10%;
+        align-content: flex-start;
+        text-align: center;
+        flex-direction: column;
+        position: absolute;
+        height: 0;
+        border-radius: 10px;
+        opacity: 0;
+        justify-content: left;
+        box-shadow: 2px 5px 225px 140px rgba(106, 106, 106, 0.705);
+    }
 
-    
+    .ratingImageDiv{
+        width: 42%;
+        height: inherit;
+    }
+    .workImage {
+        height:100%;
+    }
+    .ratingDescDiv{
+        display: flex;
+        justify-content: center;
+        padding: 2em;
+    }
+    #rateDesc{
+        width: 52em;
+        height: 6em;
+        text-align: start;
+    }
+    #ratingRecruiterName{
+        font-size: x-large;
+    }
+
+    #ratingRecruiterLocation{
+
+        font-size: x-large;
+    }
+    .rateLabel{
+        width: 1em;
+        margin-left: 0 !important;
+        max-height: 2em;
+    }
+    input[type=radio]{
+        max-height: 2em;
+    }
+    #radio{
+        display: flex;
+        margin-top: 3em;
+        max-height: 2em;
+    }

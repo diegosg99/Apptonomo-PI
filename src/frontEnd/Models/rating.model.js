@@ -1,5 +1,5 @@
 class Rating {
-      constructor(idJob,starring,idUser,idRated,comment,date){
+      constructor(idJob,starring,idUser,idRated,comment,date = ""){
           
         this.idRating = this.uuidv4();	
         this.idJob = idJob;	

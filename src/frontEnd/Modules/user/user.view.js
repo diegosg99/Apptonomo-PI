@@ -21,9 +21,15 @@ class userView {
             end: document.getElementById('end'),
             cancel: document.getElementById('cancel'),
             rate: document.getElementById('rate'),
-            closeDetails: document.getElementById('closeDetails')
-            
+            closeDetails: document.getElementById('closeDetails'),
+            ratingUserDiv: document.getElementById('ratingUserDiv'),
+            ratingDisplay: document.getElementById('ratingDisplay'),
+            ratingUserImage: document.getElementById('ratingUserImage'),
+            ratingRecruiterName: document.getElementById('ratingRecruiterName'),
+            ratingRecruiterLocation: document.getElementById('ratingRecruiterLocation'),
+            rateDesc: document.getElementById('rateDesc')
         }
+        this.accepted;
     }
     printTables = ({info,accepted,waiting}) => {
         this.refreshInfo(info)
@@ -131,6 +137,7 @@ class userView {
         let rows = Array.from(document.getElementsByClassName('accepted'));
         rows.forEach(row=>{
             row.addEventListener('click',(e)=>{
+                this.accepted=true;
                 handler(e.target.parentNode.id,accepted)
             })
         });
@@ -140,6 +147,7 @@ class userView {
         let rows = Array.from(document.getElementsByClassName('waiting'));
         rows.forEach(row=>{
             row.addEventListener('click',(e)=>{
+                this.accepted = false;
                 let work = handler(e.target.parentNode.id,accepted);
                 this.displayRelatedWork(work);
             })
@@ -166,7 +174,6 @@ bindCloseDetails = () => {
 bindEnd = (handler) => {
     this.GUI.end.addEventListener('click',e => {
         handler();
-        this.closeWorkDetails();
     })
 }
 
@@ -176,12 +183,12 @@ bindCancel = (handler) => {
         this.closeWorkDetails();
     })
 }
-/* bindRate = (handler) => {
+bindRate = (handler) => {
     this.GUI.rate.addEventListener('click',e => {
-        handler();
-        this.closeWorkDetails();
+        let data = this.getRateValues();
+        handler(data);
     })
-} */
+}
 
 closeWorkDetails = () => {
     this.GUI.workDetails.classList.remove('easeIn');
@@ -193,4 +200,25 @@ toBase64 = file => new Promise((resolve, reject) => {
     reader.onload = () => resolve(reader.result);
     reader.onerror = error => reject(error);
 });
+printRatingDiv = (user) => {
+    this.GUI.ratingRecruiterName.innerHTML = user.name;
+    this.GUI.ratingRecruiterLocation.innerHTML = user.address;
+    this.GUI.ratingUserImage.setAttribute("src",user.photo);
+    this.GUI.ratingDisplay.innerHTML = user.rating;
+
 }
+
+getRateValues = () =>{
+    let desc = this.GUI.rateDesc.value;
+    let rate = this.getRadioValue();
+    return {desc,rate}
+}
+
+getRadioValue = () => {
+    let radios = document.getElementsByName('rate');
+    let value = Object.values(radios).filter(radio=>radio.checked)[0].value;
+    return value;
+}
+
+}
+

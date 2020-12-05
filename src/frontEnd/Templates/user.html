@@ -1,4 +1,3 @@
-
 <article class="list">
     <div id="workDetails" class="workDetails">
         <div class="imageDiv">
@@ -31,36 +30,41 @@
         </div>            
     </div>
 
-    <!-- <div id="rateUserDiv" class="rateUserDiv">
-        <div class="imageDiv">
-            <img id="workImage" class="workImage" src="">
+    <div id="ratingUserDiv" class="ratingUserDiv">
+        <div class="ratingImageDiv">
+            <img id="ratingUserImage" class="workImage" src="">
         </div>
         <div class="workInfo">
             <div id="recruiterInfo">
-                <img id="recruiterImage" class="recruiterImage" src="">
-
-                <p id="recruiterName">Diego Silva</p>
-                <div class="starringDiv">
-                    <img class="starImage" src="./Assets/images/star.svg">
-                    <p id="recruiter-starring" class="recruiter-starring">5/5</p>
-                </div>
+                <p id="ratingRecruiterName">Diego Silva</p>
+                <p id="ratingRecruiterLocation">Santa Bárbara</p>
                 <button id="closeDetails" class="closeDetails">X</button>    
             </div>
-            <div id="workInfo">
-                <p id="workName"></p>
-                <p id="workLocation">Su casa</p>
-                <p id="workPay">10€</p>
-                <br>
-                <p id="workLabels">Mecanico,patólogo</p>
-                <br>
+            <div class="starringDiv">
+                <img class="starImage" src="./Assets/images/star.svg">
+                <p id="ratingDisplay" class="recruiter-starring">5/5</p>
+                <div id="radio" class="radio">
+                    <input type="radio" id="1" name="rate" value="1">
+                    <label for="1" class="rateLabel">1</label><br>
+                    <input type="radio" id="2" name="rate" value="2">
+                    <label for="2" class="rateLabel">2</label><br>
+                    <input type="radio" id="3" name="rate" value="3">
+                    <label for="3" class="rateLabel">3</label>
+                    <input type="radio" id="4" name="rate" value="4">
+                    <label for="4" class="rateLabel">4</label><br>
+                    <input type="radio" id="5" name="rate" value="5">
+                    <label for="5" class="rateLabel">5</label>
+                </div>
+                </select>
             </div>
-                <p id="workDesc">Necesito a alguien que pueda acercarse a ver a mis patos, porque creo que estan mal, los veo estornudar o algo parecido.</p>
+            <div class="ratingDescDiv">
+                <input type="text" id="rateDesc" placeholder="Di tu opinión sobre el">
+            </div>
             <div id="workActions">
-                <button id="end" class="endSelectedWork">Finalizar</button>
-                <button id="cancel" class="cancelSelectedWork">Cancelar</button>
+                <button id="rate" class="endSelectedWork">Terminar valoración</button>
             </div>
         </div>            
-    </div> -->
+    </div>
 
 <!-- ***************************************************************************************************** -->
 

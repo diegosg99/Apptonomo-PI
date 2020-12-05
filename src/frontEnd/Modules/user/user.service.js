@@ -3,6 +3,7 @@ class userService {
         this.lockService = lockService;
         this.httpService = httpService;
         this.info;
+        this.userToRate;
         this.accepted;
         this.waiting;
         this.selectedWork;
@@ -32,11 +33,19 @@ class userService {
         this.selectedWork = await this.httpService.get("http://127.0.0.1:3003/works/getWork/"+workId).then(JSON.parse);
         return this.selectedWork;
     }
-    endWork = (id) => {
-        this.httpService.post("",id);
+
+    getUserToRateData = async (accepted) => {
+        let idRated = accepted ? this.selectedWork.idUser:this.selectedWork.idWorker;
+        console.log(idRated);
+        this.userToRate = await this.httpService.get("http://127.0.0.1:3003/profile/getUser/"+idRated).then(JSON.parse);        
+        return this.userToRate;
+    }
+
+    endWork = () => {
+        this.httpService.post("http://127.0.0.1:3003/profile/work/cancel",{"id":this.selectedWork.idWork});        
     }
     
-    cancelWork = (id) => {
+    cancelWork = () => {
         let idWork = this.selectedWork.idWork;
         let idUser = this.info.uuid;
         (idUser === this.selectedWork.idUser) ? this.cancelMyWork(idWork) : this.cancelAsWorker(idWork);
@@ -50,7 +59,23 @@ class userService {
 
      }
 
- /*    rateUser = (data) => {
-        this.httpService.post("",data);
-    } */
+     rateUser = async (data) => {
+        let rating = new Rating(this.selectedWork.idWork,data.rate,this.info.uuid,this.userToRate.uuid,data.desc);
+        this.httpService.post("http://127.0.0.1:3003/profile/rate/user",rating);
+        this.updateUserRate(data);
+    }
+    realRate = (actual,rates) => {
+        let sumArray = rates.reduce((rate,{starring})=>{
+            return rate+starring;
+        },0);
+        let sum =(sumArray+parseInt(actual));
+        let res = sum/(rates.length+1);
+        return res;
+    }
+    updateUserRate = async (data) => {
+        let ratings = JSON.parse(await this.httpService.get("http://127.0.0.1:3003/profile/rates/getAll/"+this.userToRate.uuid));
+        let starring = (ratings.rows.length === 0) ? data.rate : this.realRate(data.rate,ratings.rows);
+        let id = this.userToRate.uuid;
+        this.httpService.post("http://127.0.0.1:3003/profile/rate/refresh",{starring,id});
+    }
 }
