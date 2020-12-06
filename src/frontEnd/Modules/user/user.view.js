@@ -14,6 +14,7 @@ class userView {
             workName: document.getElementById('workName'),
             workLocation: document.getElementById('workLocation'),
             workPay: document.getElementById('workPay'),
+            userStar: document.getElementById('starNumber'),
             workLabels: document.getElementById('workLabels'),
             workDesc: document.getElementById('workDesc'),
             workImage: document.getElementById('workImage'),
@@ -27,7 +28,9 @@ class userView {
             ratingUserImage: document.getElementById('ratingUserImage'),
             ratingRecruiterName: document.getElementById('ratingRecruiterName'),
             ratingRecruiterLocation: document.getElementById('ratingRecruiterLocation'),
-            rateDesc: document.getElementById('rateDesc')
+            rateDesc: document.getElementById('rateDesc'),
+            phone: document.getElementById('phone')
+
         }
         this.accepted;
     }
@@ -43,7 +46,7 @@ class userView {
     this.GUI.userPhoto.setAttribute('src',"http://127.0.0.1:3003/users/getImage/"+id);
     this.GUI.userName.innerHTML = info.name;
     this.GUI.userLocation.innerHTML = info.address;
-    this.GUI.starring.innerHTML = (info.rating)==null?0+"/5":info.rating+"/5";
+    this.GUI.userStar.innerHTML = (info.rating)==null?0+"/5":info.rating.toFixed(1)+"/5";
    }
 
     printAcceptedWorks = (accepted) => {
@@ -126,6 +129,7 @@ class userView {
         this.GUI.workDesc.innerHTML = work.description;
         this.GUI.workLocation.innerHTML = work.location;
         this.GUI.workPay.innerHTML = work.price+"€";
+        this.GUI.phone.innerHTML = work.phone;
         this.GUI.starring.innerHTML = (work.userRating)==null?"0/5":work.userRating+"/5";
         this.GUI.workLabels.innerHTML = work.labels;
         work.idWork != undefined ? this.GUI.workImage.setAttribute('src',"http://127.0.0.1:3003/works/getImage/"+work.idWork):this.GUI.workImage.setAttribute('src',"");
@@ -192,6 +196,9 @@ bindRate = (handler) => {
 
 closeWorkDetails = () => {
     this.GUI.workDetails.classList.remove('easeIn');
+}
+closeWorkRating = () => {
+    this.GUI.ratingUserDiv.classList.remove('easeIn');
 }
 
 toBase64 = file => new Promise((resolve, reject) => {

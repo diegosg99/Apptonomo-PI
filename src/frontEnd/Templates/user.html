@@ -6,8 +6,8 @@
         <div class="workInfo">
             <div id="recruiterInfo">
                 <img id="recruiterImage" class="recruiterImage" src="">
-
                 <p id="recruiterName">Diego Silva</p>
+                <p id="phone" class="phoneTag"></p>
                 <div class="starringDiv">
                     <img class="starImage" src="./Assets/images/star.svg">
                     <p id="recruiter-starring" class="recruiter-starring">5/5</p>
@@ -19,7 +19,7 @@
                 <p id="workLocation">Su casa</p>
                 <p id="workPay">10€</p>
                 <br>
-                <p id="workLabels">Mecanico,patólogo</p>
+                <p id="workLabels" class="tag">Mecanico,patólogo</p>
                 <br>
             </div>
                 <p id="workDesc">Necesito a alguien que pueda acercarse a ver a mis patos, porque creo que estan mal, los veo estornudar o algo parecido.</p>
@@ -80,22 +80,29 @@
             </div>
             <p class="location" id="userLocation">Málaga, plaza Juan Gómez Juanito Bq8 Bajo 2</p>
         </div> 
-        <div class="starring">
-            <img src="./Assets/images/star.svg" class="star"><p class="starNumber" id="starNumber">5/5</p>
-        </div>
-         <div class="worksRelated">
-             <div id="worksWaiting">
-                 <table id="worksWaitingTable">
-                    <tr><th class="worksWaiting">Trabajos publicados</th></tr>
-                    <tr><td>Todavia no has publicado ningún trabajo...</td></tr>
-                 </table id="worksAcceptedTable">
-             </div>
-             <div id="worksAccepted">
-                <table id="worksAcceptedTable">
-                   <tr><th class="worksAccepted">Mis tareas</th></tr>
-                   <tr><td>Todavia no has aceptado ningún...</td></tr>
-                </table>
+        <div class="tables">
+            <div class="worksRelated">
+                <div id="worksWaiting">
+                    <table id="worksWaitingTable">
+                       <tr><th class="worksWaiting">Trabajos publicados</th></tr>
+                       <tr><td>Todavia no has publicado ningún trabajo...</td></tr>
+                    </table id="worksAcceptedTable">
+                </div>
+                <div class="starring">
+                   <img src="./Assets/images/star.svg" class="star"><p class="starNumber" id="starNumber">5/5</p>
+               </div>
+                <div id="worksAccepted">
+                   <table id="worksAcceptedTable">
+                      <tr><th class="worksAccepted">Mis tareas</th></tr>
+                      <tr><td>Todavia no has aceptado ningún...</td></tr>
+                   </table>
+               </div>
             </div>
-         </div>
+        </div>
+        <div id="ratingDivs">
+            <ul id="ratingsList">
+                
+            </ul>
+        </div>
     </section>  
  </article>

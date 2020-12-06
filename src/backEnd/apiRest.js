@@ -41,7 +41,7 @@ app.post('/register/user', (req, res) => {
   try 
   {
     const user = req.body;
-      let sql = 'INSERT INTO users VALUES ("'+user.uuid+'","'+user.nick+'","'+user.name+'","'+user.email+'","'+user.password+'","'+user.phone+'",'+user.address+'",POINT('+user.lat+','+user.lon+'),'+user.lat+',"'+user.lon+'","'+user.bornDate+'","'+user.photo+'",'+user.rating+');';
+      let sql = 'INSERT INTO users VALUES ("'+user.uuid+'","'+user.nick+'","'+user.name+'","'+user.email+'","'+user.password+'","'+user.phone+'","'+user.address+'",POINT('+user.lat+','+user.lon+'),'+user.lat+',"'+user.lon+'","'+user.bornDate+'","'+user.photo+'",'+user.rating+');';
       mysqlQuery(sql);
       res.status(200).send({msg:"Usuario subido con éxito."});
     }catch(error){
@@ -106,9 +106,7 @@ app.post('/works/filtered', (req, res) => {
     ST_Distance_Sphere(J.locationPoint,
     POINT(${data.lat},${data.lon})) / 1000 as distance 
     from jobs as J INNER JOIN users as U ON J.idUser = U.uuid 
-    HAVING J.name LIKE '%${data.filter}%' ORDER BY distance ASC LIMIT 5;`;
-    //J.idWorker = 'null' AND to show real data
-    console.log(sql);
+    HAVING J.idWorker = 'null' AND J.name LIKE '%${data.filter}%' ORDER BY distance ASC LIMIT 5;`;
       connection.query(sql, function(err, rows, fields) {
         if (err) throw err;  
           return res.json({user:rows});
@@ -211,7 +209,7 @@ app.get('/works/getImage/:id', (req, res) => {
 app.get('/works/getWork/:id', (req, res) => {
   try {
     const data = req.params.id;
-    let sql = `SELECT U.name as userName,
+    let sql = `SELECT U.name as userName,U.phone as phone,
     CONVERT (U.photo USING utf8) as userPhoto,
     U.rating as userRating, J.*, ST_AsText(J.locationPoint) as coordinates
     from jobs as J INNER JOIN users as U ON J.idUser = U.uuid

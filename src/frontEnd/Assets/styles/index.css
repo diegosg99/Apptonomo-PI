@@ -104,7 +104,7 @@ body{
     padding-right: 2em;
 }
 .infoUser{
-    width: 80%;
+    width: 100%;
     display: inline-flex;
     justify-content: space-between;
 }
@@ -164,6 +164,17 @@ padding-left: 1em;
     padding-left: 1em;
     padding-right: 1em;
     list-style: none;
+}
+.phoneTag{
+    text-decoration: none;
+    background-color:rgb(169, 187, 247);
+    border-radius: 6px;
+    padding: .3em;
+    font-size: x-large;
+    padding-left: 1em;
+    padding-right: 1em;
+    list-style: none;
+    padding-top: 0.7em;
 }
 .tag:first-child{
     margin-left: 0px;

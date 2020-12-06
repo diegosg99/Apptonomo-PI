@@ -10,12 +10,16 @@ class userController{
     }
 
     init = async () => {
-        this.key = (await this.service.getCurrentUser()).sub;
-        let data = await this.service.bringRelatedData(this.key);
-        this.view.printTables(data);
+        await this.initTables();
         this.view.bindChangePhoto(this.handlerChangePhoto);
         this.view.bindAcceptedRows(this.handlerDisplayWork);
         this.view.bindWaitingRows(this.handlerDisplayWork);
+    }
+
+    initTables = async () => {
+        this.key = (await this.service.getCurrentUser()).sub;
+        let data = await this.service.bringRelatedData(this.key);
+        this.view.printTables(data);
     }
 
     bindInputs = () => {
@@ -32,14 +36,11 @@ class userController{
 
     handlerDisplayWork = async (id) => {
         let work = await this.service.getSelectedWorkData(id);
-        this.view.displayRelatedWork(work);
         this.bindInputs();
-    }
-    handlerDisplayAcceptedWork = (id) => {
-        this.service.getWork(id);
+        this.view.displayRelatedWork(work);
     }
     handlerEnd = async () => {
-        //this.service.endWork();
+        this.service.endWork();
         this.view.closeWorkDetails();
         let user = await this.service.getUserToRateData(this.view.accepted);
         this.view.printRatingDiv(user);
@@ -47,8 +48,14 @@ class userController{
     }
     handlerCancel = () => {
         this.service.cancelWork();
+        swal("Trabajo cancelado","Ya no tienes nada que ver con esta tarea...","success")
+
     }
-    handlerRate = (data) => {
+    handlerRate = async (data) => {
+        this.view.closeWorkRating();
         this.service.rateUser(data);
+        await this.initTables();
+        swal("Usuario valorado","Grácias por hacer mejor esta comunidad, los demás leeran tu opinión sobre el.","success")
+        
     }
 }

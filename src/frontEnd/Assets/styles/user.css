@@ -24,8 +24,7 @@
     text-align: center;
 }
 .starring{
-    width: 40%;
-    margin-left: 30%;
+    width: 10%;
     display: flex;
     justify-content: center;
     font-size: xx-large;
@@ -116,6 +115,7 @@
     padding-left: 1em;
     padding-top: 0.2em;
     font-size: xx-large;
+    width: 9em;
 }
 
 .recruiter-starring {
@@ -186,6 +186,7 @@ padding-top: 0.3em;
 
     .starringDiv{
         display: inline-flex;
+        width: 9em;
         justify-content: space-around;
     }
 
@@ -221,4 +222,14 @@ padding-top: 0.3em;
     #workActions{
         display: flex;
         justify-content: space-evenly;
+    }
+    .tables{
+        display: flex;
+        justify-content: space-between;
+    }
+    .phoneDiv{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        font-size: x-large;
     }
