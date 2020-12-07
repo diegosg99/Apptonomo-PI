@@ -152,7 +152,20 @@ app.get('/profile/rates/getAll/:id',(req,res)=>{
         res.status(200).send({rows});
         });
   }catch(error){
+    res.status(400).send({msg:"Error"});
+  }
+});
 
+app.get('/profile/rates/getProfileRates/:id',(req,res)=>{
+  try{
+    let id = req.params.id;
+    let sql = `SELECT R.*,U.uuid,U.name FROM ratings AS R INNER JOIN users as U ON R.idRated = U.uuid WHERE U.uuid = '${id}';`;
+    connection.query(sql, function(err, rows, fields) {
+        if (err) throw err;
+        res.status(200).send({rows});
+        });
+  }catch(error){
+    res.status(400).send({msg:"Error"});
   }
 });
 

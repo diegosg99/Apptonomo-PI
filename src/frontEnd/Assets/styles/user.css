@@ -233,3 +233,47 @@ padding-top: 0.3em;
         justify-content: center;
         font-size: x-large;
     }
+    .profileRate{
+        display: flex;
+        justify-content: space-between;
+    }
+    .profileRateImageDiv{
+        width: 13%;
+    }
+
+    .profileRateImageDiv img{
+        width: 9em;
+        min-height: 9em;
+        border-radius: 100%;
+    }
+
+    .profileRateUserName{
+        width: 100%;
+        font-size: x-large;
+    }
+    .profileRateStarring{
+        width:10%;
+        font-size: x-large; 
+    }
+    .profileRateComment{
+        width: 40%;
+        font-size: large; 
+    }
+    #ratingsList{
+        list-style: none;
+    }
+    #ratingDivs{
+        width: 80%;
+        margin-left: 10%;
+    }
+    .profileRateInfo{
+        display: flex;
+        justify-content: space-around;
+        width: 70%;
+        margin-top: 2em;
+    }
+    .rateTitle{
+        width: 100%;
+        font-size: xx-large;
+        text-align: center;
+    }

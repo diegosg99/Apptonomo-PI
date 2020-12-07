@@ -11,24 +11,21 @@ constructor(){
            '#exit': 'login'
            }
 
-
-        window.location.hash = '#';
+           window.location.hash = '#';
 
         window.addEventListener('hashchange',(e) => {
             e.preventDefault();
             this.url = window.location.hash;
             this.render()
         });
-        this.render(); 
-                
+        //this.render();       
    }            
 
    render = async  () => {
-       let path = 'Templates/' + this.routes[this.url] + '.html';
-    fetch(path)
-    .then(response=>response.text())
-    .then(html => this.container.innerHTML = html)
-    .then(this.completeScripts(this.url))
+        let path = 'Templates/' + this.routes[this.url] + '.html';
+        let html = await fetch(path).then(response=>response.text());
+        this.container.innerHTML = html;
+        this.completeScripts(this.url);
 }
 
    completeScripts = () => {

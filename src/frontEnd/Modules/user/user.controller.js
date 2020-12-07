@@ -3,7 +3,6 @@ class userController{
         this.view = view;
         this.service = service;
         this.key;
-        //this.user;
 
         this.service.lockService.checkToken();
         this.init();
@@ -20,10 +19,10 @@ class userController{
         this.key = (await this.service.getCurrentUser()).sub;
         let data = await this.service.bringRelatedData(this.key);
         this.view.printTables(data);
+        this.view.printProfileRatings(await this.service.bringProfileRatings());
     }
 
     bindInputs = () => {
-        //this.view.bindAcceptWorkButton(this.handlerDisplayWork);
         this.view.bindCloseDetails();
         this.view.bindEnd(this.handlerEnd);
         this.view.bindCancel(this.handlerCancel);

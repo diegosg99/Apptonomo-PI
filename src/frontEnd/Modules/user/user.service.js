@@ -78,4 +78,8 @@ class userService {
         let id = this.userToRate.uuid;
         this.httpService.post("http://127.0.0.1:3003/profile/rate/refresh",{starring,id});
     }
+    bringProfileRatings = async () => {
+        let ratings = JSON.parse(await this.httpService.get("http://127.0.0.1:3003/profile/rates/getProfileRates/"+this.info.uuid));
+        return ratings.rows;
+    }
 }

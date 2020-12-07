@@ -29,7 +29,8 @@ class userView {
             ratingRecruiterName: document.getElementById('ratingRecruiterName'),
             ratingRecruiterLocation: document.getElementById('ratingRecruiterLocation'),
             rateDesc: document.getElementById('rateDesc'),
-            phone: document.getElementById('phone')
+            phone: document.getElementById('phone'),
+            rateList: document.getElementById('ratingsList')
 
         }
         this.accepted;
@@ -159,73 +160,84 @@ class userView {
     }
 
 
-bindChangePhoto = (handler) => {
-    this.GUI.changeImage.addEventListener('change',(e)=>{
-    this.toBase64(e.target.files[0])
-    .then(base64 => handler(base64));
-    this.toBase64(e.target.files[0])
-    .then(base64=>this.GUI.userPhoto.setAttribute("src",base64))
-    })
-}
+    bindChangePhoto = (handler) => {
+        this.GUI.changeImage.addEventListener('change',(e)=>{
+        this.toBase64(e.target.files[0])
+        .then(base64 => handler(base64));
+        this.toBase64(e.target.files[0])
+        .then(base64=>this.GUI.userPhoto.setAttribute("src",base64))
+        })
+    }
 
 
-bindCloseDetails = () => {
-    this.GUI.closeDetails.addEventListener('click',e=>{
-        this.closeWorkDetails();
-    })
-}
+    bindCloseDetails = () => {
+        this.GUI.closeDetails.addEventListener('click',e=>{
+            this.closeWorkDetails();
+        })
+    }
 
-bindEnd = (handler) => {
-    this.GUI.end.addEventListener('click',e => {
-        handler();
-    })
-}
+    bindEnd = (handler) => {
+        this.GUI.end.addEventListener('click',e => {
+            handler();
+        })
+    }
 
-bindCancel = (handler) => {
-    this.GUI.cancel.addEventListener('click',e => {
-        handler();
-        this.closeWorkDetails();
-    })
-}
-bindRate = (handler) => {
-    this.GUI.rate.addEventListener('click',e => {
-        let data = this.getRateValues();
-        handler(data);
-    })
-}
+    bindCancel = (handler) => {
+        this.GUI.cancel.addEventListener('click',e => {
+            handler();
+            this.closeWorkDetails();
+        })
+    }
+    bindRate = (handler) => {
+        this.GUI.rate.addEventListener('click',e => {
+            let data = this.getRateValues();
+            handler(data);
+        })
+    }
 
-closeWorkDetails = () => {
-    this.GUI.workDetails.classList.remove('easeIn');
-}
-closeWorkRating = () => {
-    this.GUI.ratingUserDiv.classList.remove('easeIn');
-}
+    closeWorkDetails = () => {
+        this.GUI.workDetails.classList.remove('easeIn');
+    }
+    closeWorkRating = () => {
+        this.GUI.ratingUserDiv.classList.remove('easeIn');
+    }
 
-toBase64 = file => new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = error => reject(error);
-});
-printRatingDiv = (user) => {
-    this.GUI.ratingRecruiterName.innerHTML = user.name;
-    this.GUI.ratingRecruiterLocation.innerHTML = user.address;
-    this.GUI.ratingUserImage.setAttribute("src",user.photo);
-    this.GUI.ratingDisplay.innerHTML = user.rating;
+    toBase64 = file => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+    });
+    printRatingDiv = (user) => {
+        this.GUI.ratingRecruiterName.innerHTML = user.name;
+        this.GUI.ratingRecruiterLocation.innerHTML = user.address;
+        this.GUI.ratingUserImage.setAttribute("src",user.photo);
+        this.GUI.ratingDisplay.innerHTML = user.rating;
 
-}
+    }
 
-getRateValues = () =>{
-    let desc = this.GUI.rateDesc.value;
-    let rate = this.getRadioValue();
-    return {desc,rate}
-}
+    getRateValues = () =>{
+        let desc = this.GUI.rateDesc.value;
+        let rate = this.getRadioValue();
+        return {desc,rate}
+    }
 
-getRadioValue = () => {
-    let radios = document.getElementsByName('rate');
-    let value = Object.values(radios).filter(radio=>radio.checked)[0].value;
-    return value;
-}
+    getRadioValue = () => {
+        let radios = document.getElementsByName('rate');
+        let value = Object.values(radios).filter(radio=>radio.checked)[0].value;
+        return value;
+    }
 
+    printProfileRatings = (ratings) => {
+        this.GUI.rateList.innerHTML = "";
+        ratings.forEach(rate=>{
+            let li =    `<li><div class="profileRate">
+                                <div class="profileRateImageDiv"><img src="http://127.0.0.1:3003/users/getImage/${rate.uuid}" id="profileRateImage"></div>
+                                <div><p class="profileRateUserName">${rate.name}</p></div>
+                                <img src="./Assets/images/star.svg" class="star"><div class="profileRateInfo"><p class="profileRateStarring">${rate.starring}/5</p><p class="profileRateComment">${rate.comment}</p><p class="profileRateDate">${rate.date}</p></div>
+                            </div></li>`;
+            this.GUI.rateList.innerHTML += li;
+        })
+    }
 }
 
