@@ -1,8 +1,15 @@
 /**
-* Este archivo instancia el RoutingService al inicio y un objeto global de la clase DexieJS
+* Este archivo instancia el RoutingService al inicio, para ir implementando los módulos solicitados
 */
-/* const app =  */
+class apptonomo {
+    constructor(routingService){
+        this.routingService = routingService
+    }
 
-new RoutingService();
+    init = async () => {
+        await this.routingService.render()
+       }
 
-//const dexie = new DexieService('motoRental');
+}
+const app = new apptonomo(new RoutingService());
+app.init();

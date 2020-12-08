@@ -23,6 +23,7 @@ class userView {
             cancel: document.getElementById('cancel'),
             rate: document.getElementById('rate'),
             closeDetails: document.getElementById('closeDetails'),
+            closeRating: document.getElementById('closeRating'),
             ratingUserDiv: document.getElementById('ratingUserDiv'),
             ratingDisplay: document.getElementById('ratingDisplay'),
             ratingUserImage: document.getElementById('ratingUserImage'),
@@ -31,7 +32,6 @@ class userView {
             rateDesc: document.getElementById('rateDesc'),
             phone: document.getElementById('phone'),
             rateList: document.getElementById('ratingsList')
-
         }
         this.accepted;
     }
@@ -51,51 +51,23 @@ class userView {
    }
 
     printAcceptedWorks = (accepted) => {
-        let tbody = this.GUI.worksAcceptedTable;
-
-        tbody.innerHTML = "";
-
-        let head = document.createElement("tr");
-        let td = document.createElement("th");
-        let text = document.createTextNode("Tareas pendientes");
-  
-        td.appendChild(text);
-        head.appendChild(td);
-        tbody.appendChild(head);
-
-        let row = document.createElement("tr");
-        let td1 = document.createElement("th");
-        let td2 = document.createElement("th");
-        let text1 = document.createTextNode("Nombre");
-        let text2 = document.createTextNode("precio (€)");
-  
-        td1.appendChild(text1);
-        td2.appendChild(text2);
-        row.appendChild(td1);
-        row.appendChild(td2);
-        tbody.appendChild(row);
-        
+        let tbody = this.initTable(true);
         accepted.forEach(work=>{
             let tr = this.createAcceptedTag(work,true);
             tbody.appendChild(tr);
         });
     }
-    createAcceptedTag = (work,accepted) => {
-        let tr = document.createElement("tr");
-        tr.setAttribute('id',work.idWork);
-        tr.setAttribute('class',accepted?"accepted":'waiting');
-        work = {name:work.name,price:work.price};
-        Object.values(work).forEach(val=>{
-            let td = document.createElement("td");
-            let text = document.createTextNode(val);
-            td.appendChild(text);
-            tr.appendChild(td);
-        })
-        return tr;
-    }
 
     printWaitingWorks = (waiting) => {
-        let tbody = this.GUI.worksWaitingTable;
+        let tbody = this.initTable(false);
+        waiting.forEach(work=>{
+            let tr = this.createAcceptedTag(work,false);
+            tbody.appendChild(tr);
+        });
+    }
+
+    initTable = (accepted) => {
+        let tbody = accepted ? this.GUI.worksAcceptedTable : this.GUI.worksWaitingTable;
         tbody.innerHTML = "";
 
         let head = document.createElement("tr");
@@ -117,12 +89,23 @@ class userView {
         row.appendChild(td1);
         row.appendChild(td2);
         tbody.appendChild(row);
-        
-        waiting.forEach(work=>{
-            let tr = this.createAcceptedTag(work,false);
-            tbody.appendChild(tr);
-        });
+        return tbody;
     }
+
+    createAcceptedTag = (work,accepted) => {
+        let tr = document.createElement("tr");
+        tr.setAttribute('id',work.idWork);
+        tr.setAttribute('class',accepted?"accepted":'waiting');
+        work = {name:work.name,price:work.price};
+        Object.values(work).forEach(val=>{
+            let td = document.createElement("td");
+            let text = document.createTextNode(val);
+            td.appendChild(text);
+            tr.appendChild(td);
+        })
+        return tr;
+    }
+
     displayRelatedWork = (work) => {
         this.GUI.workDetails.classList.add('easeIn');
         this.GUI.recruiterImage.setAttribute('src',work.userPhoto);
@@ -176,6 +159,13 @@ class userView {
         })
     }
 
+    bindCloseRating = () => {
+        this.GUI.closeRating.addEventListener('click',e=>{
+            this.closeWorkRating();
+        })
+    };
+
+
     bindEnd = (handler) => {
         this.GUI.end.addEventListener('click',e => {
             handler();
@@ -212,7 +202,7 @@ class userView {
         this.GUI.ratingRecruiterName.innerHTML = user.name;
         this.GUI.ratingRecruiterLocation.innerHTML = user.address;
         this.GUI.ratingUserImage.setAttribute("src",user.photo);
-        this.GUI.ratingDisplay.innerHTML = user.rating;
+        this.GUI.ratingDisplay.innerHTML = user.rating.toFixed(1);
 
     }
 

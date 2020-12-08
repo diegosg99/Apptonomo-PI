@@ -24,9 +24,11 @@ class userController{
 
     bindInputs = () => {
         this.view.bindCloseDetails();
+        this.view.bindCloseRating();
         this.view.bindEnd(this.handlerEnd);
         this.view.bindCancel(this.handlerCancel);
         this.view.bindRate(this.handlerRate);
+
     }
 
     handlerChangePhoto = (file) => {
@@ -54,7 +56,7 @@ class userController{
         this.view.closeWorkRating();
         this.service.rateUser(data);
         await this.initTables();
-        swal("Usuario valorado","Grácias por hacer mejor esta comunidad, los demás leeran tu opinión sobre el.","success")
+        swal("Usuario valorado","Gracias por hacer mejor esta comunidad, los demás leeran tu opinión sobre el.","success")
         
     }
 }

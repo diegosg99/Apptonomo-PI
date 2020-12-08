@@ -16,7 +16,6 @@
     "body-parser": "^1.19.0",
     "buffer": "^6.0.2",
     "cors": "^2.8.5",
-    "dexie": "^3.0.2",
     "express": "^4.17.1",
     "gulp-minify": "^3.1.0",
     "jsdoc": "^3.6.4",
@@ -27,8 +26,7 @@
     "momentjs": "^2.0.0",
     "mysql": "^2.18.1",
     "node-fetch": "^2.6.0",
-    "requirejs": "^2.3.6",
-    "socket.io": "^3.0.3"
+    "requirejs": "^2.3.6"
   },
   "devDependencies": {
     "gulp": "^4.0.2"

@@ -1,7 +1,6 @@
 class LoginService {
-    constructor(httpService,dexieService){
+    constructor(httpService){
         this.httpService = httpService;
-        this.dexieService = dexieService;
         this.localStorage = window.localStorage;
         this.key;
     }

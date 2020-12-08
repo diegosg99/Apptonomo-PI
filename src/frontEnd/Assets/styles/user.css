@@ -69,15 +69,12 @@
     justify-content: center;
 }
 
-
-/*________________________________________________________________*/
-
 .workDetails{
     float: left;
     display: none;
     background-color: rgb(245, 245, 245);
-    width: 80%;
-    margin-left: 10%;
+    width: 86%;
+    margin-left: 6%;
     align-content: flex-start;
     text-align: center;
     flex-direction: column;
@@ -129,13 +126,13 @@ padding-top: 0.3em;
 .easeIn{
     display: inline-flex;
     opacity: 1;
-    height: 22em;
+    height: 24em;
     transition: 1s,ease-in;
     flex-direction: row;
 }
 .starImage{
-    width: 2em;
-    padding-left: 3em;
+    width: 3em;
+    padding-top: 0.5em;
 }
 
 .endSelectedWork{
@@ -150,7 +147,7 @@ padding-top: 0.3em;
     
 
     .imageDiv{
-        width: 33%;
+        width: 35%;
         min-height: 22em;
     }
     .workInfo{
@@ -186,7 +183,7 @@ padding-top: 0.3em;
 
     .starringDiv{
         display: inline-flex;
-        width: 9em;
+        width: 21em;
         justify-content: space-around;
     }
 
@@ -276,4 +273,16 @@ padding-top: 0.3em;
         width: 100%;
         font-size: xx-large;
         text-align: center;
+    }
+
+    #workDesc{
+        padding: 1em;
+        background-color:rgba(179, 175, 175, 0.39);
+    }
+
+    #workName,#workLocation,#workPay{
+        background-color:rgba(11, 149, 184, 0.575);
+        padding: 0.3em;
+        border-radius: 10px;
+        font-size: medium;
     }

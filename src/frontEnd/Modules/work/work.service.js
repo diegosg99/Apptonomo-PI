@@ -1,7 +1,6 @@
 class WorkService{
-    constructor(httpService,dexieService,lockService,mapService){
+    constructor(httpService,lockService,mapService){
         this.httpService = httpService;
-        this.dexieService = dexieService;
         this.lockService = lockService;
         this.mapService = mapService;
         this.user;
@@ -22,6 +21,7 @@ class WorkService{
         const job = new Job(this.user.uuid,jobName,jobDesc,userLocation,this.mapService.lat,this.mapService.lon,jobPay,jobLabels,photo);
         this.httpService.post('http://127.0.0.1:3003/create/job',job).then(JSON.parse)
         .then(({msg})=>msg==="Error"?swal("Fallo al subir trabajo","La foto puede no soportar un tamaño tan grande.","error","Probare de nuevo"):swal("Has subido el trabajo","¡Espera a que lo soliciten!","succes"));
+        swal("Trabajo subido con éxito","Ve a mirar a tu perfil para administrar tus tareas.","success")
     }
 
     

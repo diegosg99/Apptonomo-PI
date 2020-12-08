@@ -333,7 +333,7 @@ app.post('/profile/user/accepted', (req, res) => {
 app.post('/create/job', (req, res) => {
   try {
     const data = req.body;
-      let sql = "INSERT INTO jobs (idWork, idUser, idWorker, name, location,locationPoint,lat,lon, labels,description,price,photo,done) VALUES ('"+data.idWork+"', '"+data.idUser+"', '"+data.idWorker+"', '"+data.name+"', '"+data.location+"', POINT ("+data.lat+","+data.lon+"), "+data.lat+", "+data.lon+", '"+data.labels+"','"+data.description+"',"+data.price+",'"+data.photo+"',0);";
+      let sql = "INSERT INTO jobs (idWork, idUser, idWorker, name, location,locationPoint,lat,lon, labels,description,price,photo) VALUES ('"+data.idWork+"', '"+data.idUser+"', '"+data.idWorker+"', '"+data.name+"', '"+data.location+"', POINT ("+data.lat+","+data.lon+"), "+data.lat+", "+data.lon+", '"+data.labels+"','"+data.description+"',"+data.price+",'"+data.photo+"');";
       mysqlQuery(sql);
       res.status(200).send("Tranajo subido");
     }catch(error){

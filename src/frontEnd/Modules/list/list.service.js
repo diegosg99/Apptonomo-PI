@@ -1,7 +1,6 @@
 class ListService {
-    constructor(httpService,dexieService,lockService){
+    constructor(httpService,lockService){
         this.httpService = httpService;
-        this.dexieService = dexieService;
         this.lockService = lockService;
         this.key= "";
         this.userInfo ="";

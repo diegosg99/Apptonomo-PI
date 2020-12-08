@@ -1,1 +1,1 @@
-new ListController(new ListView(),new ListService(new httpService(),new DexieService('apptonomo'),new lockService(new httpService())))
+new ListController(new ListView(),new ListService(new httpService(),new lockService(new httpService())))

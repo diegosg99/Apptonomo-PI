@@ -36,7 +36,6 @@ class userService {
 
     getUserToRateData = async (accepted) => {
         let idRated = accepted ? this.selectedWork.idUser:this.selectedWork.idWorker;
-        console.log(idRated);
         this.userToRate = await this.httpService.get("http://127.0.0.1:3003/profile/getUser/"+idRated).then(JSON.parse);        
         return this.userToRate;
     }
@@ -50,13 +49,11 @@ class userService {
         let idUser = this.info.uuid;
         (idUser === this.selectedWork.idUser) ? this.cancelMyWork(idWork) : this.cancelAsWorker(idWork);
     }
-//TODO become delete.
     cancelMyWork = (id) => {
         this.httpService.post("http://127.0.0.1:3003/profile/work/cancel",{"id":id});
     }
      cancelAsWorker = (id) => {
         this.httpService.post("http://127.0.0.1:3003/profile/work/quitWorker",{"id":id});
-
      }
 
      rateUser = async (data) => {

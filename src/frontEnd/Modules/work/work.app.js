@@ -1,1 +1,1 @@
-new WorkController(new WorkView(),new WorkService(new httpService(),new DexieService('apptonomo'),new lockService(new httpService()),new MapService(new httpService())))
+new WorkController(new WorkView(),new WorkService(new httpService(),new lockService(new httpService()),new MapService(new httpService())))
